@@ -1,0 +1,39 @@
+<%= @specificproject.name %>
+
+<table>
+  <thead>
+    <tr>
+      
+      <th>creator name</th>
+      
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @creators.each do |creator| %>
+      <tr>
+        <td><%= creator.email %></td>
+        <td><%= link_to 'Destroy', deleteuser_project_path(creator.id,@specificproject.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+    <th>Developer name</th>
+    <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @developers.each do |developer| %>
+      <tr>
+        <td><%= developer.email %></td>
+        <td><%= link_to 'Destroy', deleteuser_project_path(developer.id,@specificproject.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

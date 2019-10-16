@@ -1,0 +1,28 @@
+<% if @allprojects.count>0 %>
+<div id="list of all projects">
+  
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @allprojects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+       
+        <td><%= link_to 'Show', user_projectcode_path(project.manager_id,project) %></td>
+        <td><%= link_to 'Edit', edit_user_projectcode_path(project.manager_id,project) %></td>
+        <td><%= link_to 'Destroy', user_projectcode_path(project.manager_id,project), method: :delete, data: { confirm: 'Are you sure?' } %>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% end %>
