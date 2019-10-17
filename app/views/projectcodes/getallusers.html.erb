@@ -1,0 +1,57 @@
+
+
+<h1> Project:<%=@project.name%></h1>
+
+ <% if @userproject.errors.messages.any? %>
+ <div id="error_explanation">
+   <h2><%= pluralize(@userproject.errors.count, "error") %> prohibited this project info from being saved:</h2>
+
+   <ul>
+   <% @userproject.errors.messages.each do |msg| %>
+     <li><%= msg %></li>
+   <% end %>
+   </ul>
+ </div>
+ <% end %>
+
+
+
+<table>
+  <thead>
+    <tr>
+      
+      <th>creator name</th>
+      
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @creators.each do |creator| %>
+      <tr>
+        <td><%= creator.email %></td>
+        <td><%= link_to 'Add resource', assign_resource_project_path(@project,creator),method: :post %>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+    <th>Developer name</th>
+    <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @developers.each do |developer| %>
+      <tr>
+        <td><%= developer.email %></td>
+        <td><%= link_to 'Add resource', assign_resource_project_path(@project,developer),method: :post %>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>

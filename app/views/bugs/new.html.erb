@@ -1,0 +1,18 @@
+
+<div id="one">  </div>
+
+<%= form_for :bug, url: {action: "create"} do |f| %>
+    <%= f.label :title %> <br>
+    <%= f.text_field :title %><br>
+    <br>
+    <%= f.label :description %> <br>
+    <%= f.text_field :descryption %><br>
+    <br>
+    <%= f.label :bugtype %> <br>
+    <%= select_tag(:bugtype, options_for_select([['feature','feature'],['Bug','bug']])) %>
+    <br>
+    <br>
+    <%= f.label :bugstatus %> <br>
+    <%= select_tag(:bugstatus, options_for_select([]))%>
+    , <%= f.submit %>
+    <% end %>

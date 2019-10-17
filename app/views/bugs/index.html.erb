@@ -1,0 +1,26 @@
+
+  <div id="list of all bugs">
+  
+    <table>
+      <thead>
+        <tr>
+          <th>BugTitle</th>
+          <th>BugType</th>
+          <th>BugStatus</th>
+          
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+      <% @bugs.each do |bug| %>
+          <tr>
+      <td> <%= bug.title  %> </td>
+        <td> <%= bug.bugtype  %> </td>
+        <td> <%= bug.status %> </td>
+         </tr>
+     <% end %>
+      </tbody>
+    </table>
+    
+  </div>

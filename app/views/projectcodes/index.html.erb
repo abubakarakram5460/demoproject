@@ -1,28 +1,32 @@
 <% if @allprojects.count>0 %>
-<div id="list of all projects">
-  
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
+  <div id="list of all projects">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          
+          <th colspan="1"></th>
+        </tr>
+      </thead>
       
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @allprojects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-       
-        <td><%= link_to 'Show', user_projectcode_path(project.manager_id,project) %></td>
-        <td><%= link_to 'Edit', edit_user_projectcode_path(project.manager_id,project) %></td>
-        <td><%= link_to 'Destroy', user_projectcode_path(project.manager_id,project), method: :delete, data: { confirm: 'Are you sure?' } %>
-       
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
+      <tbody>
+        <% @allprojects.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <% if(current_user.type=="Manager")  %>
+              <td><%= link_to 'Add', get_all_users_path(project.manager_id,project) %></td>
+              <td><%= link_to 'Edit', edit_user_projectcode_path(project.manager_id,project) %></td>
+              <td><%= link_to 'Destroy', user_projectcode_path(project.manager_id,project), method: :delete, data: { confirm: 'Are you sure?' } %>
+            
+            <% elsif(current_user.type=="Developer") %>
+            <td><%= link_to 'Show', user_projectcode_path(project.manager_id,project)%></td>
+            <% else %>
+            <td><%= link_to 'View Bugs', user_projectcode_bugs_path(current_user.id,project)%></td>
+            <td><%= link_to 'Report Bugs',new_user_projectcode_bug_path(current_user.id,project)%></td>
+          </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
