@@ -1,6 +1,6 @@
 
-  <div id="list of all bugs">
-  
+  <div id="list of all unassigned bugs">
+     <h1>list of all unassigned bugs</h1>
     <table>
       <thead>
         <tr>
@@ -14,13 +14,56 @@
       
       <tbody>
       <% @bugs.each do |bug| %>
+          
+        <%if(bug.status=='new')%>
+            <tr>
+      <td> <%= bug.title  %> </td>
+        <td> <%= bug.bugtype  %> </td>
+        <td> <%= bug.status %> </td>
+        <% if(current_user.type=="Creator") %>
+        <td><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug) %></td>
+        <% elsif(current_user.type=="Developer")%>
+        <td><%= link_to 'Assign', assign_project_developer_bug_path(bug.projectcode_id,current_user.id,bug),method: :post %></td>
+        <% end%>
+        </tr>
+        <% end%>
+       <% end %>
+      </tbody>
+    </table>
+    
+  </div>
+
+
+  <div id="list of all bugs">
+  <h1>list of all assigned bugs</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>BugTitle</th>
+          <th>BugType</th>
+          <th>BugStatus</th>
+          
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+      <% @bugs.each do |bug| %>
+        <%if(bug.status=='started'||bug.status=='completed'||bug.status=='resolved')%>
           <tr>
       <td> <%= bug.title  %> </td>
         <td> <%= bug.bugtype  %> </td>
         <td> <%= bug.status %> </td>
-         </tr>
+        <% if(current_user.type=="Creator") %>
+        <td><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug) %></td>
+        <% elsif(current_user.type=="Developer") %>
+        <td id="change status"><%= link_to 'Edit bug status', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug) %></td>
+        <% end%>
+        </tr>
+        <% end %>
      <% end %>
       </tbody>
     </table>
     
   </div>
+

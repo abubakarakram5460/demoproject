@@ -1,11 +1,19 @@
 
-<div id="one">  </div>
+<% if @bug.errors.messages.any? %>
+<div id="error_explanation">
+  <ul>
+  <% @bug.errors.messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
 
-<%= form_for :bug, url: {action: "create"} do |f| %>
+<%= form_for :bug, url: {action: "create"},:html =>{:multipart=>true} do |f| %>
     <%= f.label :title %> <br>
     <%= f.text_field :title %><br>
     <br>
-    <%= f.label :description %> <br>
+    <%= f.label :descryption %> <br>
     <%= f.text_field :descryption %><br>
     <br>
     <%= f.label :bugtype %> <br>
@@ -13,6 +21,20 @@
     <br>
     <br>
     <%= f.label :bugstatus %> <br>
-    <%= select_tag(:bugstatus, options_for_select([]))%>
-    , <%= f.submit %>
+    <%= select_tag(:bugstatus, options_for_select([['new','new'],['started','started'],['completed','completed']]))%>
+    <br>
+    <br>
+    <%= f.label :deadline %> 
+    <br>
+    <%= date_field(:deadline, :date) %>
+    <br>
+    <br>
+    <%= f.label :reportdate %> 
+    <br>
+    <%= date_field(:report, :date) %>
+    <br>
+    <br>
+    <%= f.label :screenshot %> 
+    <%= f.file_field :screenshot %><br>
+    <%= f.submit %>
     <% end %>

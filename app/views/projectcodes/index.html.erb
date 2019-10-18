@@ -19,7 +19,8 @@
               <td><%= link_to 'Destroy', user_projectcode_path(project.manager_id,project), method: :delete, data: { confirm: 'Are you sure?' } %>
             
             <% elsif(current_user.type=="Developer") %>
-            <td><%= link_to 'Show', user_projectcode_path(project.manager_id,project)%></td>
+            
+            <td><%= link_to 'View Bugs', user_projectcode_bugs_path(current_user.id,project)%></td>
             <% else %>
             <td><%= link_to 'View Bugs', user_projectcode_bugs_path(current_user.id,project)%></td>
             <td><%= link_to 'Report Bugs',new_user_projectcode_bug_path(current_user.id,project)%></td>

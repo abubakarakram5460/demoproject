@@ -20,26 +20,22 @@ def new
      @creators=@specificproject.users.where(:type => "Creator")
      @developers=@specificproject.users.where(:type => "Developer")
      elsif(current_user.type=="Creator")
-         
-      
-     end
+    end
     end   
     
     def create
      if(post_params[:name].blank?)
       post_params[:name]=nil
-    end
+     end
      @project=Projectcode.create(name:post_params[:name],manager_id:params[:user_id]);
      if @project.errors.count>0
         render 'new'
      end 
-      
     end   
     
     def edit
         @user=User.find(params[:user_id])
         @project=Projectcode.find(params[:id])
-
     end
     def update
 
@@ -81,9 +77,9 @@ def new
     render 'getallusers'
     end
     end  
-    
-   
 
+    
+    
     def post_params
     params.require(:projectcode).permit(:name)
     end
