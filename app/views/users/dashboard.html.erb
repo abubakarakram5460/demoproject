@@ -6,6 +6,7 @@
   <%= link_to 'Createproject', new_user_projectcode_path(current_user.id) %>
 
   <% elsif(current_user.type=="Developer")  %>
+  
   <%= link_to 'Showprojects', user_projectcodes_path(current_user.id) %>
   <h1>developerdashboard</h1>
 

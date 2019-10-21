@@ -1,63 +1,66 @@
 class ProjectcodesController < ApplicationController
-
+  #  after_action :verify_authorized
  
- def index
-  #  @allprojects=Projectcode.where(manager_id:params[:user_id])   
-  @allprojects = current_user.projectcodes
-  puts @allprojects  
- end  
+    def index
+    @allprojects = current_user.projectcodes
+    end  
 
-def new
+    def new
     @user=User.find(params[:user_id])
-    if(@user.type=="Manager")
-     @project=Projectcode.new
+    @project=Projectcode.new
     end
-
-    end
+   
     def show
      @specificproject=Projectcode.find(params[:id])
      if(current_user.type=="Manager")
      @creators=@specificproject.users.where(:type => "Creator")
      @developers=@specificproject.users.where(:type => "Developer")
      elsif(current_user.type=="Creator")
-    end
+     end
     end   
     
     def create
-     if(post_params[:name].blank?)
-      post_params[:name]=nil
-     end
-     @project=Projectcode.create(name:post_params[:name],manager_id:params[:user_id]);
-     if @project.errors.count>0
-        render 'new'
-     end 
+      if(post_params[:name].blank?)
+        post_params[:name]=nil
+      end
+      @project=Projectcode.new(name:post_params[:name],manager_id:current_user.id);
+      authorize @project
+      if @project.save
+        redirect_to user_projectcodes_path(current_user.id)
+      elsif (@project.errors.count>0)
+        render 'new'      
+      end 
     end   
     
     def edit
-        @user=User.find(params[:user_id])
-        @project=Projectcode.find(params[:id])
+        @user=User.find(current_user.id)
     end
-    def update
 
+    def update
         @project=Projectcode.find(params[:id])
+        authorize @project
         if(@project.update(post_params))
           redirect_to user_projectcode_path(params[:user_id],@project)
         else
           render 'edit'  
         end
     end
-    def destroy
-      if(params[:id])  
-       @project=Projectcode.destroy(params[:id])
-       redirect_to user_projectcodes_path(params[:user_id])  
-      end
-    end  
+
+    def destroy                                
+       @project=Projectcode.find(params[:id])
+       authorize @project
+       @project.destroy
+       redirect_to user_projectcodes_path(@project.manager_id)  
+    end
+
     def removeuser
         @user=Userproject.find_by(:user_id => params[:user_id])
-        Userproject.destroy(@user.id)
         @project=Projectcode.find(params[:project_id])
+        authorize @project
+        Userproject.destroy(@user.id)
         redirect_to user_projectcode_path(params[:user_id],@project)
-    end    
+    end
+
     def getallusers
      @developers=Developer.all
      @creators=Creator.all
@@ -66,20 +69,19 @@ def new
     end
     
     def assignresource
-    @project=Projectcode.find(params[:project_id]);
-    @user=User.find(params[:resource_id]);
-    @userproject=Userproject.new(user_id:@user.id,projectcode_id:params[:project_id],usertype:@user.type)
-    @developers=Developer.all
-    @creators=Creator.all
-    if @userproject.save
-      redirect_to user_projectcode_path(@user,params[:project_id])
-    else
-    render 'getallusers'
-    end
+        @project=Projectcode.find(params[:project_id]);
+        @user=User.find(params[:resource_id]);
+        @userproject=Userproject.new(user_id:@user.id,projectcode_id:params[:project_id],usertype:@user.type)
+        authorize @project
+        @developers=Developer.all
+        @creators=Creator.all
+      if @userproject.save
+        redirect_to user_projectcode_path(@user,params[:project_id])
+      else
+        render 'getallusers'
+      end
     end  
 
-    
-    
     def post_params
     params.require(:projectcode).permit(:name)
     end
