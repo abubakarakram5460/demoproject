@@ -22,6 +22,7 @@ class BugsController < ApplicationController
 
   def update
     @bug=Bug.find(params[:id]);
+    authorize @bug
     if(@bug.update(post_params))
        redirect_to user_projectcode_bugs_path  
     else 
@@ -35,10 +36,15 @@ class BugsController < ApplicationController
   end
 
   def destroy
+    @bug=Bug.find(params[:id])
+    authorize @bug
+    @bug.destroy 
+    redirect_to user_projectcode_bugs_path(params[:user_id],@bug.projectcode_id) 
   end
   
   def assignbugtodeveloper
    @bug=Bug.find(params[:id])
+   authorize @bug
    @bug.update(developer_id:params[:user_id],status:'started')
    redirect_to user_projectcode_bugs_path(params[:user_id],@bug.projectcode_id)
   end 

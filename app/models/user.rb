@@ -14,6 +14,15 @@ class User < ApplicationRecord
    
          has_many :userprojects
          has_many :projectcodes ,:through => :userprojects
+ 
+   def self.get_total_developers(projects)
+      projects.each do |project|
+        puts project.name
+        
+      end
+     
+   end
+
 
 
 end

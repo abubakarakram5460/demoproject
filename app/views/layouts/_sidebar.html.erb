@@ -1,0 +1,21 @@
+<div class="w3-sidebar w3-bar-block w3-light-grey w3-card fullsidebar">
+<div class="w3-sidebar w3-bar-block w3-large">
+
+<%= link_to 'Dashboard', dashboard_path ,class:"w3-bar-item w3-button"%>
+
+<%  if(current_user.type=="Manager")  %>  
+<%= link_to 'Showprojects', user_projectcodes_path(current_user.id) ,class:"w3-bar-item w3-button"%>
+<%= link_to 'Createproject', new_user_projectcode_path(current_user.id) ,class:"w3-bar-item w3-button"%>
+
+<% elsif(current_user.type=="Developer")  %>
+
+<%= link_to 'Showprojects', user_projectcodes_path(current_user.id) ,class:"w3-bar-item w3-button"%>
+
+
+<% else %>
+<%= link_to 'Showprojects', user_projectcodes_path(current_user.id),class:"w3-bar-item w3-button" %>
+
+<% end %>
+
+</div>
+</div>

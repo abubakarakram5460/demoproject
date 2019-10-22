@@ -1,0 +1,11 @@
+<nav class="navbar navbar-light  nav-complete">
+  <a class="navbar-brand" href="#">
+  <%= image_tag("bugzilla.jpg", :alt => "rss feed", class: "d-inline-block align-top nav-image") %>
+  <h8>  Bugzilla </h8>
+  </a>
+  <span class="navbar-text">
+  <% if user_signed_in? %>
+      <%= link_to 'Log out', destroy_user_session_path, method: :delete ,:class=>"btn btn-danger btn-lg log-button"  %>
+  <% end %>
+</span>
+</nav>

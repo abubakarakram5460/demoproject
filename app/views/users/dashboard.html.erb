@@ -1,9 +1,42 @@
 
 
-
+  <div class="dashboard">
   <%  if(current_user.type=="Manager")  %>  
-  <%= link_to 'Showprojects', user_projectcodes_path(current_user.id) %>
-  <%= link_to 'Createproject', new_user_projectcode_path(current_user.id) %>
+  <div class="container">
+  <div class="row">
+  <div class="col-md-4">
+  <div class="card">
+   <%= image_tag("bugzilla.jpg", :alt => "Total projects created", class: "card-img-top") %>
+  <div class="card-body">
+    <h4 class="card-title">Total projects created</h4>
+    <p class="card-text"><%= @projects.count  %></p>
+  </div>
+  </div>
+</div>
+<div class="col-md-4">
+<div class="card">
+ <%= image_tag("bugzilla.jpg", :alt => "Total projects created", class: "card-img-top") %>
+<div class="card-body">
+  <h4 class="card-title">Total Quality assurance assign</h4>
+  <p class="card-text"><%=  @totalprojectcreators %></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card">
+ <%= image_tag("bugzilla.jpg", :alt => "Total projects created", class: "card-img-top") %>
+<div class="card-body">
+  <h4 class="card-title">Total developers assign</h4>
+  <p class="card-text"><%= @totalprojectdevelopers  %></p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
 
   <% elsif(current_user.type=="Developer")  %>
   
@@ -14,4 +47,4 @@
   <%= link_to 'Showprojects', user_projectcodes_path(current_user.id) %>
   <h1>qadashboard</h1>
   <% end %>
-
+</div>

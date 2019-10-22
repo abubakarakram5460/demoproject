@@ -22,6 +22,7 @@
         <td> <%= bug.status %> </td>
         <% if(current_user.type=="Creator") %>
         <td><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug) %></td>
+        <td><%= link_to 'Delete', user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% elsif(current_user.type=="Developer")%>
         <td><%= link_to 'Assign', assign_project_developer_bug_path(bug.projectcode_id,current_user.id,bug),method: :post %></td>
         <% end%>
