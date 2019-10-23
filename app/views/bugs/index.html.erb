@@ -1,14 +1,17 @@
-
+  <div class="middlecontent">
   <div id="list of all unassigned bugs">
-     <h1>list of all unassigned bugs</h1>
-    <table>
+  <div class="jumbotron">
+  <h1>Unassigned bugs</h1>
+</div>
+    <table class="table table-hover table-dark full-table">
       <thead>
         <tr>
-          <th>BugTitle</th>
-          <th>BugType</th>
-          <th>BugStatus</th>
+          <th scope="col">BugTitle</th>
+          <th scope="col">BugType</th>
+          <th scope="col">BugStatus</th>
+          <th scope="col">BugDeadline</th>
           
-          <th colspan="1"></th>
+          <th scope="col" colspan="2" class="tabledata">Actions</th>
         </tr>
       </thead>
       
@@ -20,11 +23,12 @@
       <td> <%= bug.title  %> </td>
         <td> <%= bug.bugtype  %> </td>
         <td> <%= bug.status %> </td>
+        <td> <%= bug.deadline %> </td>
         <% if(current_user.type=="Creator") %>
-        <td><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug) %></td>
-        <td><%= link_to 'Delete', user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="tabledata"><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %></td>
+        <td class="tabledata"><%= link_to 'Delete', user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-primary" %></td>
         <% elsif(current_user.type=="Developer")%>
-        <td><%= link_to 'Assign', assign_project_developer_bug_path(bug.projectcode_id,current_user.id,bug),method: :post %></td>
+        <td class="tabledata"><%= link_to 'Assign Bug', assign_project_developer_bug_path(bug.projectcode_id,current_user.id,bug),method: :post,class:"btn btn-primary" %></td>
         <% end%>
         </tr>
         <% end%>
@@ -35,16 +39,19 @@
   </div>
 
 
-  <div id="list of all bugs">
-  <h1>list of all assigned bugs</h1>
-    <table>
+  <div id="list of all bugs" style="margin-top:50px">
+  <div class="jumbotron">
+  <h1>Assigned bugs</h1>
+</div>
+    <table class="table table-hover table-dark full-table">
       <thead>
         <tr>
-          <th>BugTitle</th>
-          <th>BugType</th>
-          <th>BugStatus</th>
+          <th scope="col">BugTitle</th>
+          <th scope="col">BugType</th>
+          <th scope="col">BugStatus</th>
+          <th scope="col">BugDeadline</th>
           
-          <th colspan="1"></th>
+          <th scope="col" colspan="2" class="tabledata">Actions</th>
         </tr>
       </thead>
       
@@ -55,10 +62,11 @@
       <td> <%= bug.title  %> </td>
         <td> <%= bug.bugtype  %> </td>
         <td> <%= bug.status %> </td>
+        <td> <%= bug.deadline %> </td>
         <% if(current_user.type=="Creator") %>
-        <td><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug) %></td>
+        <td class="tabledata"><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %></td>
         <% elsif(current_user.type=="Developer") %>
-        <td id="change status"><%= link_to 'Edit bug status', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug) %></td>
+        <td class="tabledata" id="change status"><%= link_to 'Mark as resolved', mark_project_bug_resolved_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary",method: :post %></td>
         <% end%>
         </tr>
         <% end %>
@@ -68,3 +76,4 @@
     
   </div>
 
+</div>

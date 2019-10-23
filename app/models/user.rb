@@ -7,22 +7,19 @@ class User < ApplicationRecord
   # def set_default_role
   #   self.type ||= :Manager
   # end  
-
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
    
          has_many :userprojects
          has_many :projectcodes ,:through => :userprojects
  
-   def self.get_total_developers(projects)
-      projects.each do |project|
-        puts project.name
-        
-      end
-     
+   def self.get_all_developers_excluding_specificproject(project)
+    User.all.where.not(id:project.users.ids,type:["Creator","Manager"])  
+   end
+   
+   def self.get_all_creators_excluding_specificproject(project)
+    User.all.where.not(id:project.users.ids,type:["Developer","Manager"])  
    end
 
 
-
-end
+  end

@@ -10,4 +10,13 @@ class Bug < ApplicationRecord
     belongs_to :projectcode
     validates :title, uniqueness: true
     belongs_to :creator
-end
+
+    def self.deletespecificprojectbugs(project)
+        @specificprojectbugs=Bug.where(projectcode_id:project.id)
+        @specificprojectbugs.each do |bug| 
+        bug.destroy
+        end
+    end
+
+
+ end

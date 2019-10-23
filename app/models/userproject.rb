@@ -21,6 +21,12 @@ class Userproject < ApplicationRecord
         end
         @totaldevelopers
        end
+       def self.deletespecificprojectassignusers(project)
+         @alluserproject=project.userprojects
+         @alluserproject.each do |userproject| 
+          userproject.destroy
+          end
+       end
 
 
 

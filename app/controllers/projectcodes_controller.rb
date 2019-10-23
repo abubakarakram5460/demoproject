@@ -8,6 +8,7 @@ class ProjectcodesController < ApplicationController
     def new
     @user=User.find(params[:user_id])
     @project=Projectcode.new
+    
     end
    
     def show
@@ -15,7 +16,7 @@ class ProjectcodesController < ApplicationController
      if(current_user.type=="Manager")
      @creators=@specificproject.users.where(:type => "Creator")
      @developers=@specificproject.users.where(:type => "Developer")
-     elsif(current_user.type=="Creator")
+     
      end
     end   
     
@@ -28,12 +29,14 @@ class ProjectcodesController < ApplicationController
       if @project.save
         redirect_to user_projectcodes_path(current_user.id)
       elsif (@project.errors.count>0)
-        render 'new'      
+        render 'new'
+              
       end 
     end   
     
     def edit
         @user=User.find(current_user.id)
+        @project=Projectcode.find(params[:id])
     end
 
     def update
@@ -47,10 +50,12 @@ class ProjectcodesController < ApplicationController
     end
 
     def destroy                                
-       @project=Projectcode.find(params[:id])
-       authorize @project
-       @project.destroy
-       redirect_to user_projectcodes_path(@project.manager_id)  
+        @project=Projectcode.find(params[:id])
+        authorize @project
+        Bug.deletespecificprojectbugs(@project)
+        Userproject.deletespecificprojectassignusers(@project)
+        @project.destroy
+        redirect_to user_projectcodes_path(@project.manager_id)  
     end
 
     def removeuser
@@ -62,9 +67,9 @@ class ProjectcodesController < ApplicationController
     end
 
     def getallusers
-     @developers=Developer.all
-     @creators=Creator.all
-     @project=Projectcode.find(params[:project_id]);
+      @project=Projectcode.find(params[:project_id]);
+      @developers=User.get_all_developers_excluding_specificproject(@project)
+     @creators=User.get_all_creators_excluding_specificproject(@project)
      @userproject=Userproject.new
     end
     
@@ -73,9 +78,7 @@ class ProjectcodesController < ApplicationController
         @user=User.find(params[:resource_id]);
         @userproject=Userproject.new(user_id:@user.id,projectcode_id:params[:project_id],usertype:@user.type)
         authorize @project
-        @developers=Developer.all
-        @creators=Creator.all
-      if @userproject.save
+         if @userproject.save
         redirect_to user_projectcode_path(@user,params[:project_id])
       else
         render 'getallusers'

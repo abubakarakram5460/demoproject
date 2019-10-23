@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191017135419) do
+ActiveRecord::Schema.define(version: 20191023144455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bugs", force: :cascade do |t|
     t.string "title"
-    t.string "deadline"
-    t.string "date"
+    t.datetime "deadline"
+    t.datetime "date"
     t.string "screenshot"
     t.string "bugtype"
     t.string "status"

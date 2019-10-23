@@ -1,19 +1,18 @@
+<div class="middlecontent">
 
-<% if @project.errors.messages.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project info from being saved:</h2>
-
-  <ul>
-  <% @project.errors.messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
-</div>
-<% end %>
+<%= render "error",resource:@project %>
 
 <%= form_for :projectcode, url: {action: "create"} do |f| %>
-    <%= f.label :name %> <br>
-    <%= f.text_field :name %> <br>
-    <br>
-    <%= f.submit %>
+<div class="form-group row">
+  <div class="help-block with-errors"></div>
+    <%= f.label :name ,class:"col-sm-2 col-form-label" %> <br>
+    <div class="col-sm-8">
+    <%= f.text_field :name ,class:"form-control my-form",required: true %> 
+  
+    </div>
+    </div>
+    <%= f.submit class: 'btn btn-primary' %>
+    </div>
     <% end %>
+
+    </div>

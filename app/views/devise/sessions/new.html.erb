@@ -1,26 +1,36 @@
-<h2>Log in</h2>
+  <div class="login-form">
+  <h2>Log in</h2>
+  <%= image_tag("images.png", :alt => "rss feed", class: "d-inline-block align-top nav-image") %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-group ">
   <div class="field">
     <%= f.label :email %><br />
+    
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  
+    </div>
   </div>
-
+  <div class="form-group ">
   <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
-
+  </div>
   <% if devise_mapping.rememberable? %>
+  <div class="form-group ">
     <div class="field">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
+    </div>
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in",class:"btn btn-primary" %>
   </div>
 <% end %>
+<button type="button" class="btn btn-success mybutton"><%= render "devise/shared/links" %></button>
 
-<%= render "devise/shared/links" %>
+
+</div>

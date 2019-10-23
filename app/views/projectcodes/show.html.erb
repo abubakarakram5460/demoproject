@@ -1,39 +1,52 @@
-<%= @specificproject.name %>
 
-<table>
+<div class="middlecontent">
+<div class="jumbotron">
+  <h1><%=@specificproject.name %>'s info</h1>
+</div>
+<div class ="container">
+<div class="row">
+<div class="col-md-6">
+<table class="table table-hover table-dark full-table">
   <thead>
     <tr>
-      
-      <th>creator name</th>
-      
-      <th colspan="1"></th>
+    <th scope="col">id</th>
+    <th scope="col">Creatorname</th>
+    <th scope="col">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @creators.each do |creator| %>
       <tr>
+      <th scope="row"><%=creator.id%></th>
         <td><%= creator.email %></td>
         <td><%= link_to 'Destroy', deleteuser_project_path(creator.id,@specificproject.id), method: :delete, data: { confirm: 'Are you sure?' } %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<table>
+</div>
+<div class="col-md-6">
+<table class="table table-hover table-dark full-table">
   <thead>
     <tr>
-    <th>Developer name</th>
-    <th colspan="1"></th>
+    <th scope="col">id</th>
+    <th scope="col">Developer name</th>
+    <th scope="col">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @developers.each do |developer| %>
       <tr>
+      <th scope="row"><%=developer.id%></th>
         <td><%= developer.email %></td>
         <td><%= link_to 'Destroy', deleteuser_project_path(developer.id,@specificproject.id), method: :delete, data: { confirm: 'Are you sure?' } %>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
+</div>
+</div>
+   </div>

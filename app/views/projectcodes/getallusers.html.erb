@@ -1,6 +1,8 @@
 
-
-<h1> Project:<%=@project.name%></h1>
+<div class="middlecontent">
+<div class="jumbotron">
+  <h1>Add Resorces <%=@project.name %>'s </h1>
+</div>
 
  <% if @userproject.errors.messages.any? %>
  <div id="error_explanation">
@@ -14,44 +16,50 @@
  </div>
  <% end %>
 
-
-
-<table>
+  <div class ="container">
+<div class="row">
+<div class="col-md-6">
+<table class="table table-hover table-dark full-table">
   <thead>
     <tr>
-      
-      <th>creator name</th>
-      
-      <th colspan="1"></th>
+    <th scope="col">id</th>
+    <th scope="col">Creatorname</th>
+    <th scope="col">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @creators.each do |creator| %>
       <tr>
+      <th scope="row"><%=creator.id%></th>
         <td><%= creator.email %></td>
         <td><%= link_to 'Add resource', assign_resource_project_path(@project,creator),method: :post %>
-        
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<table>
+</div>
+<div class="col-md-6">
+<table class="table table-hover table-dark full-table">
   <thead>
     <tr>
-    <th>Developer name</th>
-    <th colspan="1"></th>
+    <th scope="col">id</th>
+    <th scope="col">Developer name</th>
+    <th scope="col">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @developers.each do |developer| %>
       <tr>
+      <th scope="row"><%=developer.id%></th>
         <td><%= developer.email %></td>
         <td><%= link_to 'Add resource', assign_resource_project_path(@project,developer),method: :post %>
-       
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
+</div>
+</div>
+<div>
