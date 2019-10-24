@@ -39,7 +39,11 @@ class BugsController < ApplicationController
       @bug=Bug.find(params[:id])
       authorize @bug
       @bug.destroy 
-      redirect_to user_projectcode_bugs_path(params[:user_id],@bug.projectcode_id) 
+      respond_to do |format|
+        format.js
+        format.html { redirect_to user_projectcode_bugs_path(params[:user_id],@bug.projectcode_id) , notice: 'Bug was successfully removedd.'}
+        format.json { head :no_content }
+   end
   end
   def markasreolved
       @bug=Bug.find(params[:id])

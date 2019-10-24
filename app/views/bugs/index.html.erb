@@ -1,79 +1,87 @@
   <div class="middlecontent">
-  <div id="list of all unassigned bugs">
-  <div class="jumbotron">
-  <h1>Unassigned bugs</h1>
-</div>
-    <table class="table table-hover table-dark full-table">
-      <thead>
-        <tr>
-          <th scope="col">BugTitle</th>
-          <th scope="col">BugType</th>
-          <th scope="col">BugStatus</th>
-          <th scope="col">BugDeadline</th>
-          
-          <th scope="col" colspan="2" class="tabledata">Actions</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-      <% @bugs.each do |bug| %>
-          
-        <%if(bug.status=='new')%>
-            <tr>
-      <td> <%= bug.title  %> </td>
-        <td> <%= bug.bugtype  %> </td>
-        <td> <%= bug.status %> </td>
-        <td> <%= bug.deadline %> </td>
-        <% if(current_user.type=="Creator") %>
-        <td class="tabledata"><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %></td>
-        <td class="tabledata"><%= link_to 'Delete', user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-primary" %></td>
-        <% elsif(current_user.type=="Developer")%>
-        <td class="tabledata"><%= link_to 'Assign Bug', assign_project_developer_bug_path(bug.projectcode_id,current_user.id,bug),method: :post,class:"btn btn-primary" %></td>
-        <% end%>
-        </tr>
-        <% end%>
-       <% end %>
-      </tbody>
-    </table>
-    
-  </div>
-
-
-  <div id="list of all bugs" style="margin-top:50px">
-  <div class="jumbotron">
-  <h1>Assigned bugs</h1>
-</div>
-    <table class="table table-hover table-dark full-table">
-      <thead>
-        <tr>
-          <th scope="col">BugTitle</th>
-          <th scope="col">BugType</th>
-          <th scope="col">BugStatus</th>
-          <th scope="col">BugDeadline</th>
-          
-          <th scope="col" colspan="2" class="tabledata">Actions</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-      <% @bugs.each do |bug| %>
-        <%if(bug.status=='started'||bug.status=='completed'||bug.status=='resolved')%>
+    <div id="list of all unassigned bugs">
+      <div class="jumbotron">
+        <h1>Unassigned bugs</h1>
+      </div>
+      <table class="table table-hover table-dark full-table">
+        <thead>
           <tr>
-      <td> <%= bug.title  %> </td>
-        <td> <%= bug.bugtype  %> </td>
-        <td> <%= bug.status %> </td>
-        <td> <%= bug.deadline %> </td>
-        <% if(current_user.type=="Creator") %>
-        <td class="tabledata"><%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %></td>
-        <% elsif(current_user.type=="Developer") %>
-        <td class="tabledata" id="change status"><%= link_to 'Mark as resolved', mark_project_bug_resolved_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary",method: :post %></td>
-        <% end%>
-        </tr>
-        <% end %>
-     <% end %>
-      </tbody>
-    </table>
-    
-  </div>
+            <th scope="col">BugTitle</th>
+            <th scope="col">BugType</th>
+            <th scope="col">BugStatus</th>
+            <th scope="col">BugDeadline</th>
 
-</div>
+            <th scope="col" colspan="2" class="tabledata">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @bugs.each do |bug| %>
+
+          <%if(bug.status=='new')%>
+          <tr>
+            <td> <%= bug.title  %> </td>
+            <td> <%= bug.bugtype  %> </td>
+            <td> <%= bug.status %> </td>
+            <td> <%= bug.deadline %> </td>
+            <% if(current_user.type=="Creator") %>
+            <td class="tabledata">
+              <%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %>
+            </td>
+            <td class="tabledata">
+              <%= link_to 'Delete', user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),method: :delete, data: { confirm: 'Are you sure?',remote: true },class:"btn btn-danger delete" %>
+            </td>
+            <% elsif(current_user.type=="Developer")%>
+            <td class="tabledata">
+              <%= link_to 'Assign Bug', assign_project_developer_bug_path(bug.projectcode_id,current_user.id,bug),method: :post,class:"btn btn-primary" %>
+            </td>
+            <% end%>
+          </tr>
+          <% end%>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
+
+    <div id="list of all bugs" style="margin-top:50px">
+      <div class="jumbotron">
+        <h1>Assigned bugs</h1>
+      </div>
+      <table class="table table-hover table-dark full-table">
+        <thead>
+          <tr>
+            <th scope="col">BugTitle</th>
+            <th scope="col">BugType</th>
+            <th scope="col">BugStatus</th>
+            <th scope="col">BugDeadline</th>
+
+            <th scope="col" colspan="2" class="tabledata">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @bugs.each do |bug| %>
+          <%if(bug.status=='started'||bug.status=='completed'||bug.status=='resolved')%>
+          <tr>
+            <td> <%= bug.title  %> </td>
+            <td> <%= bug.bugtype  %> </td>
+            <td> <%= bug.status %> </td>
+            <td> <%= bug.deadline %> </td>
+            <% if(current_user.type=="Creator") %>
+            <td class="tabledata">
+              <%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %>
+            </td>
+            <% elsif(current_user.type=="Developer") %>
+            <td class="tabledata" id="change status">
+              <%= link_to 'Mark as resolved', mark_project_bug_resolved_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary",method: :post %>
+            </td>
+            <% end%>
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

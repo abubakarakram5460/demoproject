@@ -1,18 +1,14 @@
-<div class="middlecontent" >
-
-<%= render "error",resource:@project %>
-
-
-<%= form_with model: @project, url:user_projectcode_path,local: true do |f| %>
-    <div class="form-group row">
+<div class="middlecontent">
+  <%= render "error",resource:@project %>
+  <%= form_with model: @project, url:user_projectcode_path,local: true do |f| %>
+  <div class="form-group row">
     <div class="help-block with-errors"></div>
-      <%= f.label :name ,class:"col-sm-2 col-form-label" %> <br>
-      <div class="col-sm-8">
-      <%= f.text_field :name ,class:"form-control my-form",required: true %> 
-    
-      </div>
-      </div>
-      <%= f.submit class: 'btn btn-primary' %>
-    <% end %>
+    <%= f.label :name ,class:"col-sm-2 col-form-label" %> <br>
+    <div class="col-sm-8">
+      <%= f.text_field :name ,class:"form-control my-form",required: true %>
 
     </div>
+  </div>
+  <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>

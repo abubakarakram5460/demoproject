@@ -1,5 +1,9 @@
 <div class="middlecontent" >
-
+    
+  <div class="jumbotron">
+        <h1>Edit Bug</h1>
+      </div>
+      
     <%= render "error",resource:@bug %>
    <%= form_with model: @bug, url:user_projectcode_bug_path ,:html =>{:multipart=>true}  do |f| %>
   

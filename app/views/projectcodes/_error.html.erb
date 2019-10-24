@@ -1,5 +1,5 @@
 <% resource.errors.each do |attr, msg| %>
-    <li>
-      <%= resource.errors.full_messages_for(attr).first if resource.errors[attr].first == msg %>
-    </li>
-  <% end %>
+<li>
+  <%= resource.errors.full_messages_for(attr).first if resource.errors[attr].first == msg %>
+</li>
+<% end %>

@@ -1,65 +1,68 @@
-
 <div class="middlecontent">
-<div class="jumbotron">
-  <h1>Add Resorces <%=@project.name %>'s </h1>
-</div>
+  <div class="jumbotron">
+    <h1>Add Resorces <%=@project.name %>'s </h1>
+  </div>
 
- <% if @userproject.errors.messages.any? %>
- <div id="error_explanation">
-   <h2><%= pluralize(@userproject.errors.count, "error") %> prohibited this project info from being saved:</h2>
+  <% if @userproject.errors.messages.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@userproject.errors.count, "error") %> prohibited this project info from being saved:</h2>
 
-   <ul>
-   <% @userproject.errors.messages.each do |msg| %>
-     <li><%= msg %></li>
-   <% end %>
-   </ul>
- </div>
- <% end %>
+    <ul>
+      <% @userproject.errors.messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
 
-  <div class ="container">
-<div class="row">
-<div class="col-md-6">
-<table class="table table-hover table-dark full-table">
-  <thead>
-    <tr>
-    <th scope="col">id</th>
-    <th scope="col">Creatorname</th>
-    <th scope="col">Actions</th>
-    </tr>
-  </thead>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table table-hover table-dark full-table">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">email</th>
+              <th scope="col">QAname</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
 
-  <tbody>
-    <% @creators.each do |creator| %>
-      <tr>
-      <th scope="row"><%=creator.id%></th>
-        <td><%= creator.email %></td>
-        <td><%= link_to 'Add resource', assign_resource_project_path(@project,creator),method: :post %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-<div class="col-md-6">
-<table class="table table-hover table-dark full-table">
-  <thead>
-    <tr>
-    <th scope="col">id</th>
-    <th scope="col">Developer name</th>
-    <th scope="col">Actions</th>
-    </tr>
-  </thead>
+          <tbody>
+            <% @creators.each do |creator| %>
+            <tr>
+              <th scope="row"><%=creator.id%></th>
+              <td><%= creator.email %></td>
+              <td><%= creator.name %></td>
+              <td><%= link_to 'Add resource', assign_resource_project_path(@project,creator),method: :post,class:"btn btn-primary" %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-hover table-dark full-table">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">email</th>
+              <th scope="col">Developer name</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
 
-  <tbody>
-    <% @developers.each do |developer| %>
-      <tr>
-      <th scope="row"><%=developer.id%></th>
-        <td><%= developer.email %></td>
-        <td><%= link_to 'Add resource', assign_resource_project_path(@project,developer),method: :post %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-<div>
+          <tbody>
+            <% @developers.each do |developer| %>
+            <tr>
+              <th scope="row"><%=developer.id%></th>
+              <td><%= developer.email %></td>
+              <td><%= developer.name %></td>
+              <td><%= link_to 'Add resource', assign_resource_project_path(@project,developer),method: :post,class:"btn btn-primary" %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div>
