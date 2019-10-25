@@ -2,20 +2,24 @@ class ProjectcodesController < ApplicationController
   #  after_action :verify_authorized
  
     def index
+        @user= User.find(params[:user_id])
+        authorize @user
         @allprojects = current_user.projectcodes
+        
     end  
 
     def new
         @user=User.find(params[:user_id])
+        authorize @user
         @project=Projectcode.new
     end
    
     def show
         @specificproject=Projectcode.find(params[:id])
-        if(current_user.type=="Manager")
+        authorize @specificproject
         @creators=@specificproject.users.where(:type => "Creator")
         @developers=@specificproject.users.where(:type => "Developer")
-        end
+        
     end   
     
     def create
@@ -76,6 +80,7 @@ class ProjectcodesController < ApplicationController
 
     def getallusers
         @project=Projectcode.find(params[:project_id]);
+        authorize @project
         @developers=User.get_all_developers_excluding_specificproject(@project)
         @creators=User.get_all_creators_excluding_specificproject(@project)
         @userproject=Userproject.new

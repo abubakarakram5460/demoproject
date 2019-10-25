@@ -2,6 +2,10 @@ class BugsController < ApplicationController
 
 
   def index
+      @user= User.find(params[:user_id])
+      authorize @user
+      @project=Projectcode.find(params[:projectcode_id])
+      authorize @project
       @bugs=Bug.where(:projectcode_id => params[:projectcode_id])
   end
 

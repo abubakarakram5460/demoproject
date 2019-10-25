@@ -19,3 +19,32 @@
 // require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).on('click',".open-AddImgDialog", function() {               
+    html2canvas($("#picture"), {
+        onrendered: function (canvas) {
+
+            //theCanvas = canvas;
+            //document.body.appendChild(canvas);
+            //Canvas2Image.saveAsPNG(canvas); 
+
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            var img = document.getElementById("test");
+
+            var x = 0;
+            var y = 0;
+            var width = 200;
+            var height = 200;
+
+            ctx.drawImage(img, x, y, width, height);
+
+        }
+    });
+
+});
+
+$(document).on('click',"#open-AddImgDialog", function() {  
+    $('#imagemodal').modal('show');   
+});
