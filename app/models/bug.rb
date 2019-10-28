@@ -18,5 +18,7 @@ class Bug < ApplicationRecord
         end
     end
 
+  
+
 
  end

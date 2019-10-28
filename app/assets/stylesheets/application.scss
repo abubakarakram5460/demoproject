@@ -10,3 +10,14 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+.outer{
+    display: flex;
+    justify-content: space-between;
+}
+.sidebar{
+    width:20%;
+}
+.middlebar{
+  width: 80%;
+}

@@ -10,6 +10,8 @@ class BugsController < ApplicationController
   end
 
   def new
+       @user = current_user
+      @project=Projectcode.find(params[:projectcode_id])  
       @bug=Bug.new
   end
 
@@ -47,17 +49,19 @@ class BugsController < ApplicationController
         format.js
         format.html { redirect_to user_projectcode_bugs_path(params[:user_id],@bug.projectcode_id) , notice: 'Bug was successfully removedd.'}
         format.json { head :no_content }
-   end
+      end
   end
+  
   def markasreolved
       @bug=Bug.find(params[:id])
       @bug.update(status:"resolved")
       redirect_to user_projectcode_bugs_path
   end  
+  
   def assignbugtodeveloper
       @bug=Bug.find(params[:id])
       authorize @bug
-      @bug.update(developer_id:params[:user_id],status:'started')
+       @bug.update(developer_id:params[:user_id],status:'started')
       redirect_to user_projectcode_bugs_path(params[:user_id],@bug.projectcode_id)
   end 
 
@@ -66,7 +70,7 @@ class BugsController < ApplicationController
   
   private
   def post_params
-      params.require(:bug).permit(:title,:descryption,:screenshot,:date,:deadline).merge(bugtype: params[:bugtype],status:params[:bugstatus],projectcode_id:params[:projectcode_id],creator_id:params[:user_id]);
+      params.require(:bug).permit(:title,:descryption,:screenshot,:deadline).merge(bugtype: params[:bugtype],status:params[:bugstatus],projectcode_id:params[:projectcode_id],creator_id:params[:user_id],date:Date.today);
   end
 
 

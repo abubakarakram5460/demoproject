@@ -1,0 +1,27 @@
+<div class="col-md-4">
+        <div class="card">
+                <%= image_tag("project.svg", :alt => "Total projects created", class: "card-img-top") %>
+                <div class="card-body">
+                        <h4 class="card-title">Total projects created</h4>
+                        <p class="card-text"><%= @projects.count  %></p>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="card">
+                            <%= image_tag("developers.svg", :alt => "Total projects created", class: "card-img-top") %>
+                            <div class="card-body">
+                              <h4 class="card-title">Total Quality assurance assign</h4>
+                              <p class="card-text"><%=  @totalprojectcreators %></p>
+                            </div>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                            <div class="card">
+                              <%= image_tag("developers.svg", :alt => "Total projects created", class: "card-img-top") %>
+                              <div class="card-body">
+                                <h4 class="card-title">Total developers assign</h4>
+                                <p class="card-text"><%= @totalprojectdevelopers  %></p>
+                              </div>
+                            </div>
+                          </div>

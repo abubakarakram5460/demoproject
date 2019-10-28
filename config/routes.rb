@@ -11,8 +11,8 @@ post '/users/:user_id/project/:projectcode_id/bugs/:id/mark_bug', to:'bugs#marka
   resources :users,only:[] do
     resources :projectcodes do
       resources :bugs
-      end
     end
+  end
    
 
 root to: 'users#dashboard'
