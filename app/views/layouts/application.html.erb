@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Project</title>
-    <%= csrf_meta_tags %>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  </head>
 
-  <body>
+<head>
+  <title>Project</title>
+  <%= csrf_meta_tags %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body>
   <% if user_signed_in? %>
   <%=render 'layouts/navbar' %>
   <% end %>
-  <% if user_signed_in? %>
-  <%=render 'layouts/sidebar' %>
-  <% end %>
-  <% if false %>
-  <nav>
-  Navigation
-  <%= link_to 'Dashboard', dashboard_path %>
-  <% if user_signed_in? %>
-      <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-  <% end %>
-</nav>
-<% end %>
+  <div class="fluid-container">
+    <div class="row">
+      <div class="col-2">
+        <% if user_signed_in? %>
+        <%=render 'layouts/sidebar' %>
+        <% end %>
+      </div>
+      <% if user_signed_in? %>
+      <div class="col-10 middlesection">
+        <% else %>
+        <div class="col-12 middlesection"></div>
+        <% end %>
+        <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </div>
 
-<% flash.each do |key, value| %>
-<div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-  
 
 
-  <%= yield %>
-  </body>
+
+</body>
+
 </html>
