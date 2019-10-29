@@ -82,4 +82,4 @@ test:
 #
 production:
   <<: *default
-  database: project_production
+  database: Bugzilla_demo
