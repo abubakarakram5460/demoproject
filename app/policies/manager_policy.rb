@@ -7,16 +7,15 @@ class ManagerPolicy < ApplicationPolicy
     
     end 
      
-     def index?
-      current_user.id==record.id
-   
-     end 
-   
-     def new?
+    def index?
+        current_user.id==record.id
+    end 
+    
+    def new?
         current_user.id==record.id&&current_user.is_a?(Manager)
-      end
-   
+    end
+    
     def dashboard?
    
     end   
-   end   
+end   

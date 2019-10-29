@@ -5,7 +5,6 @@ class ProjectcodesController < ApplicationController
         @user= User.find(params[:user_id])
         authorize @user
         @allprojects = current_user.projectcodes
-        
     end  
 
     def new
@@ -51,7 +50,6 @@ class ProjectcodesController < ApplicationController
     end
 
     def destroy 
-                                       
         @project=Projectcode.find(params[:id])
         authorize @project
         Bug.deletespecificprojectbugs(@project)
@@ -62,7 +60,6 @@ class ProjectcodesController < ApplicationController
               format.html { redirect_to user_projectcodes_path(@project.manager_id) , notice: 'Project was successfully removedd.'}
               format.json { head :no_content }
          end
-         
     end
 
     def removeuser
@@ -75,7 +72,6 @@ class ProjectcodesController < ApplicationController
             format.html { redirect_to user_projectcode_path(params[:user_id],@project) , notice: 'Resource was successfully removed.' }
             format.json { head :no_content }
         end
-        
     end
 
     def getallusers

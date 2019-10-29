@@ -17,8 +17,16 @@ class Bug < ApplicationRecord
         bug.destroy
         end
     end
-
-  
-
+    enum status: [:newer , :started , :resolved , :completed] do
+      event :assign do
+        transition :newer => :started
+      end
+      event :complete do
+        transition :started => :completed 
+      end
+      event :resolve do
+        transition :started => :resolved
+      end 
+    end  
 
  end

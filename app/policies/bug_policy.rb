@@ -24,7 +24,9 @@ class BugPolicy < ApplicationPolicy
     
     def assignbugtodeveloper?
         @current_user.is_a?(Developer)  
-    end   
-   
-
+    end 
+    def markasreolved?  
+        @current_user.is_a?(Creator)&&record.developer_id==current_user.id
+        true
+    end
 end   
