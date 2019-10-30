@@ -1,0 +1,27 @@
+<table class="table table-hover table-dark full-table">
+    <thead>
+        <tr>
+            <th scope="col">BugTitle</th>
+            <th scope="col">BugType</th>
+            <th scope="col">BugStatus</th>
+            <th scope="col">BugDeadline</th>
+            <th scope="col" colspan="2" class="tabledata">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <%if(data=="unassigned")%>
+        <% resources.each do |bug| %>
+         <% if bug.status=="newer" %>
+        <%= render :partial => "showbug",locals: {bug: bug,data:"newer"} %>
+        <% end %>
+        <% end%>
+        <% else %>
+        <% resources.each do |bug| %>
+        <% if bug.status=="started" ||bug.status=="completed" ||bug.status=="resolved"%>
+        <%= render :partial => "showbug",locals: {bug: bug,data:"assigned"} %>
+        <% end%>
+        <% end%>
+        <% end %>
+    </tbody>
+</table>

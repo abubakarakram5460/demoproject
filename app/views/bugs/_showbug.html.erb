@@ -1,0 +1,55 @@
+<tr>
+        <td> <%= bug.title  %> </td>
+        <td> <%= bug.bugtype  %> </td>
+        <td> <%= bug.status %> </td>
+        <td> <%= bug.deadline %> </td>
+        <% if data == "newer" %>
+        <% if(current_user.type=="Creator") %>
+        <td class="tabledata">
+          <%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %>
+        </td>
+        <td class="tabledata">
+          <%= link_to 'Delete', user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),method: :delete, data: { confirm: 'Are you sure?',remote: true },class:"btn btn-danger delete" %>
+        </td>
+        <% elsif(current_user.type=="Developer")%>
+        <td class="tabledata">
+          <%= link_to 'Assign Bug', assign_project_developer_bug_path(current_user.id,bug.projectcode_id,bug),method: :post,class:"btn btn-primary" %>
+           <%= link_to 'View', 'javascript:;' , { 'data-toggle' =>  "modal", 'data-target' => '#exampleModalCenter', class: 'btn btn-success btn-lg modal-btn', 'data-img' => bug.screenshot}%>
+        
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img src="" , id="modal-img", alt="bug image">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </td>
+        <% end%>
+
+        <% else %>
+        <% if(current_user.type=="Creator") %>
+        <td class="tabledata">
+          <%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %>
+        </td>
+        <% elsif(current_user.type=="Developer") %>
+        <td class="tabledata" id="change status">
+          <%= link_to 'Mark as resolved', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary",method: :post %>
+          <%= link_to 'View', 'javascript:;' , { 'data-toggle' =>  "modal", 'data-target' => '#exampleModalCenter', class: 'btn btn-success btn-lg modal-btn', 'data-img' => bug.screenshot}%>
+        </td>
+        <% end%>
+        <% end%>
+    

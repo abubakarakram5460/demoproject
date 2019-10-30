@@ -1,4 +1,3 @@
-
 <div class="middlecontent">
   <div class="jumbotron">
     <h1>AllProjects</h1>
@@ -34,7 +33,6 @@
           <% else %>
           <td class="tabledata">
             <%= link_to 'View Bugs', user_projectcode_bugs_path(current_user.id,project),class:"btn btn-primary"%></td>
-
           <td class="tabledata">
             <%= link_to 'Report Bugs',new_user_projectcode_bug_path(current_user.id,project),class:"btn btn-primary"%>
           </td>

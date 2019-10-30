@@ -1,0 +1,25 @@
+<table class="table table-hover table-dark full-table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">email</th>
+            <th scope="col"> name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% resource.each do |resource| %>
+        <tr>
+            <th scope="row"><%=resource.id%></th>
+            <td><%= resource.email %></td>
+            <td><%= resource.name %></td>
+           <% if controller.action_name == "show" %>
+            <td>
+                <%= link_to 'Destroy', deleteuser_project_path(resource.id,@specificproject.id), method: :delete, data: { confirm: 'Are you sure?',remote: true },class:"btn btn-danger delete" %></td>  
+           <% else %>
+                <td><%= link_to 'Add resource', assign_resource_project_path(@project,resource),method: :post,class:"btn btn-primary" %>
+           <% end %>
+                </tr>
+        <% end %>
+    </tbody>
+</table>

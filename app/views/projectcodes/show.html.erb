@@ -2,54 +2,16 @@
   <div class="jumbotron">
     <h1><%=@specificproject.name %>'s Resources</h1>
   </div>
+  
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <table class="table table-hover table-dark full-table">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">email</th>
-              <th scope="col">QAname</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @creators.each do |creator| %>
-            <tr>
-              <th scope="row"><%=creator.id%></th>
-              <td><%= creator.email %></td>
-              <td><%= creator.name %></td>
-              <td>
-                <%= link_to 'Destroy', deleteuser_project_path(creator.id,@specificproject.id), method: :delete, data: { confirm: 'Are you sure?',remote: true },class:"btn btn-danger delete" %>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+          <h3 class="tableheading">QA</h3>
+        <%= render :partial => "table",locals: {resource: @creators} %>
       </div>
       <div class="col-md-6">
-        <table class="table table-hover table-dark full-table">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">Email</th>
-              <th scope="col">Developer name</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @developers.each do |developer| %>
-            <tr>
-              <th scope="row"><%=developer.id%></th>
-              <td><%= developer.email %></td>
-              <th scope="row"><%=developer.name%></th>
-             <td>
-                <%= link_to 'Destroy', deleteuser_project_path(developer.id,@specificproject.id), method: :delete,  data: { confirm: 'Are you sure?',remote: true},class:"btn btn-danger delete" %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+          <h3 class="tableheading">Developer</h3>
+        <%= render :partial => "table",locals: {resource: @developers} %>
       </div>
     </div>
   </div>
