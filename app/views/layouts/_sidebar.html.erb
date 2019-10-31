@@ -19,7 +19,7 @@
 </div>
 <% elsif(current_user.type=="Developer")  %>
 <div class="sidebar-link">
-        <%= image_tag("chalkboard-solid.svg", :alt => "rss feed", class: "icon-small") %>
+        <%= image_tag("tasks-solid.svg", :alt => "rss feed", class: "icon-small") %>
 <%= link_to 'Showprojects', user_projectcodes_path(current_user.id) ,class:"my-button"%>
 </div>
 

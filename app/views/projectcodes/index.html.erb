@@ -1,13 +1,13 @@
 <div class="middlecontent">
   <div class="jumbotron">
-    <h1>AllProjects</h1>
+    <h1>All Projects</h1>
   </div>
   <% if @allprojects.count>0 %>
   <div id="list of all projects">
     <table class="table table-hover table-dark full-table">
       <thead>
         <tr>
-          <th scope="col">id</th>
+          <th scope="col">Id</th>
           <th scope="col">Title</th>
           <% if current_user.type=="Manager" %>
           <th scope="col"></th>
@@ -22,7 +22,7 @@
           <th scope="row"><%=project.id%></th>
           <td><%= project.name %></td>
           <% if(current_user.type=="Manager")  %>
-          <td><%= link_to 'AddResources', get_all_users_path(project.manager_id,project),class:"btn btn-primary" %></td>
+          <td><%= link_to 'Add Resources', get_all_users_path(project.manager_id,project),class:"btn btn-primary" %></td>
           <td><%= link_to 'Edit', edit_user_projectcode_path(project.manager_id,project),class:"btn btn-primary" %></td>
           <td>
             <%= link_to 'Destroy', user_projectcode_path(project.manager_id,project), method: :delete, data: { confirm: 'Are you sure?', disable_with: "Destroying", remote: true},class:"btn btn-danger delete" %>
@@ -34,7 +34,7 @@
           <td class="tabledata">
             <%= link_to 'View Bugs', user_projectcode_bugs_path(current_user.id,project),class:"btn btn-primary"%></td>
           <td class="tabledata">
-            <%= link_to 'Report Bugs',new_user_projectcode_bug_path(current_user.id,project),class:"btn btn-primary"%>
+            <%= link_to 'Report Bug',new_user_projectcode_bug_path(current_user.id,project),class:"btn btn-primary"%>
           </td>
         </tr>
         <% end %>

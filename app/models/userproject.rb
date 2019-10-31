@@ -9,19 +9,19 @@ class Userproject < ApplicationRecord
             @totalcreator=@totalcreator+project.userprojects.where(usertype:"Creator").count
         end
         @totalcreator
-      end
-      def self.gettotaldevelopers(projects)
+    end
+    def self.gettotaldevelopers(projects)
           @totaldevelopers=0
           projects.each do |project|
               @totaldevelopers= project.userprojects.where(usertype:"Developer").count+@totaldevelopers
           end
           @totaldevelopers
-      end
+    end
        
-      def self.deletespecificprojectassignusers(project)
+    def self.deletespecificprojectassignusers(project)
           @alluserproject=project.userprojects
           @alluserproject.each do |userproject| 
           userproject.destroy
           end
-      end
+    end
 end
