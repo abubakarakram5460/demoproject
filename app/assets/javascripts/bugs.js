@@ -30,12 +30,5 @@ $(document).on('turbolinks:load', function () {
   $("#exampleModalCenter").modal();
 
   })
-
-  
-
-
-
-  
-
 });
 

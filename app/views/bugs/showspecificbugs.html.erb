@@ -1,0 +1,15 @@
+<div class="middlecontent">
+    <div id="list of all unassigned bugs">
+      <div class="jumbotron">
+        <h1>Unassigned bugs</h1>
+      </div>
+      <%= render :partial => "table",locals: {resources: @bugs,data:'unassigned'} %>
+
+    </div>
+    <div id="list of all bugs" style="margin-top:50px">
+      <div class="jumbotron">
+        <h1>Assigned bugs</h1>
+      </div>
+      <%= render :partial => "table",locals: {resources: @bugs,data:'assigned'} %>
+    </div>
+  </div>

@@ -1,18 +1,16 @@
-
 <div class="middlecontent">
-  <div class="jumbotron">
-    <h1>Dashboard</h1>
-  </div>
-  <div class="container fullcontainer">
-  <div class="row">
-  <% if(current_user.type=="Manager") %>
-     <%= render 'manager' %>
-     <% elsif(current_user.type=="Creator") %>
-     <%= render 'creator' %> 
-     <% else %>
-     <%= render 'developer' %>
-      <% end %>
-    </div>
-  </div>
-    </div>
-  
+      <div class="jumbotron">
+            <h1>Dashboard</h1>
+      </div>
+            <div class="container fullcontainer">
+                  <div class="row">
+                        <% if(current_user.type=="Manager") %>
+                              <%= render 'manager' %>
+                        <% elsif(current_user.type=="Creator") %>
+                              <%= render 'creator' %>
+                        <% else %>
+                              <%= render 'developer' %>
+                        <% end %>
+                  </div>
+            </div>
+</div>

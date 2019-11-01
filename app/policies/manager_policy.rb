@@ -14,6 +14,9 @@ class ManagerPolicy < ApplicationPolicy
     def new?
         current_user.id==record.id&&current_user.is_a?(Manager)
     end
+    def showspecificbugs?
+        current_user.id==record.id  
+     end 
     
     def dashboard?
    

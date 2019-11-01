@@ -7,7 +7,9 @@ delete '/deleteuser/:user_id/project/:project_id', to: 'projectcodes#removeuser'
 get '/users/:user_id/addResource/:project_id', to: 'projectcodes#getallusers' ,as:'get_all_users'
 post '/users/:user_id/project/:project_id/bugs/:id/assign_bug', to:'bugs#assignbugtodeveloper' ,as:'assign_project_developer_bug'
 post '/users/:user_id/project/:projectcode_id/bugs/:id/mark_bug', to:'bugs#markasreolved' ,as:'mark_project_bug_resolved'
-
+get '/users/:user_id/bugs',to:'bugs#showspecificbugs' ,as:'show_specific_bugs'
+get '/users/:user_id/assigned_qa',to:'users#showassignedcreators' ,as:'show_specific_creator'
+get '/users/:user_id/assigned_developer',to:'users#showassigneddevelopers' ,as:'show_specific_developer'
   resources :users,only:[] do
     resources :projectcodes , :path=>'projects' do
       resources :bugs

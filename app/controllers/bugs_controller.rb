@@ -82,7 +82,12 @@ class BugsController < ApplicationController
       @bug.update(developer_id:params[:user_id])
       @bug.assign
       redirect_to user_projectcode_bugs_path(params[:user_id],@bug.projectcode_id)
-  end 
+  end
+  def showspecificbugs
+      @user=User.find(params[:user_id])
+      authorize @user
+      @bugs=Bug.getspecificuserbugs(@user)
+  end  
 
   private
   def post_params

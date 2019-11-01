@@ -19,4 +19,28 @@ class User < ApplicationRecord
         User.all.where.not(id:project.users.ids,type:["Developer","Manager"])  
     end
 
- end
+    def self.get_manager_projects(user)
+        user.projectcodes   
+    end
+    
+    def self.get_assigned_creators(projects)
+        @creator=[]
+        projects.each do |project|
+        @creators=project.users.where(:type=>"Creator")
+            @creators.each do |creator|
+                @creator.push(creator)
+            end
+        end  
+        @creator=@creator.uniq
+    end 
+    def self.get_assigned_developers(projects)
+        @developer=[]
+        projects.each do |project|
+            @developers=project.users.where(:type=>"Developer")
+            @developers.each do |developer|
+                @developer.push(developer)
+            end
+        end  
+        @developer=@developer.uniq
+    end      
+end

@@ -8,7 +8,10 @@ class UserPolicy < ApplicationPolicy
   
     def index?
         current_user.id==record.id
-    end 
+    end
+    def showspecificbugs?
+        current_user.id==record.id  
+    end      
 
     def dashboard?
     #   @current_user.is_a?(Manager)

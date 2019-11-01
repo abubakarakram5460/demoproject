@@ -4,7 +4,9 @@
             <th scope="col">Id</th>
             <th scope="col">Email</th>
             <th scope="col"> Name</th>
+            <% if controller.action_name=="show"||controller.action_name=="getallusers" %>
             <th scope="col">Actions</th>
+            <% end %>
         </tr>
     </thead>
     <tbody>
@@ -16,10 +18,11 @@
            <% if controller.action_name == "show" %>
             <td>
                 <%= link_to 'Destroy', deleteuser_project_path(resource.id,@specificproject.id), method: :delete, data: { confirm: 'Are you sure?',remote: true },class:"btn btn-danger delete" %></td>  
-           <% else %>
+           <% elsif controller.action_name == "getallusers" %>
                 <td><%= link_to 'Add Resource', assign_resource_project_path(@project,resource),method: :post,class:"btn btn-primary" %>
+           
            <% end %>
-                </tr>
+        </tr>
         <% end %>
     </tbody>
 </table>

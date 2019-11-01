@@ -4,16 +4,15 @@
                 <div class="card-body">
                         <h4 class="card-title">Total projects invloved</h4>
                         <p class="card-text"><%= @projects.count  %></p>
-                    </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                    <div class="card">
-                            <%= image_tag("bug-solid.svg", :alt => "Total projects created", class: "card-img-top") %>
-                            <div class="card-body">
-                                    <h4 class="card-title">Total Bugs Reported</h4>
-                                    <p class="card-text"><%=  @totalbugs %></p>
-                            </div>
-                    </div>
-                    </div>
-                   
+        </div>
+</div>
+<div class="col-md-6">
+        <div class="card">
+                <%= image_tag("bug-solid.svg", :alt => "Total projects created", class: "card-img-top") %>
+                <div class="card-body">
+                        <h4 class="card-title">Total Bugs Reported</h4>
+                        <p class="card-text"><%=  @totalbugs %></p>
+                </div>
+        </div>
+</div>

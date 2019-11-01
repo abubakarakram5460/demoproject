@@ -8,7 +8,10 @@ class CreatorPolicy < ApplicationPolicy
      
     def index?
         current_user.id==record.id
-    end 
+    end
+    def showspecificbugs?
+        current_user.id==record.id  
+    end  
     
     def dashboard?
    
