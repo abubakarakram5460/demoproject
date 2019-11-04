@@ -1,4 +1,5 @@
 <div class="col-md-6">
+                <%= link_to user_projectcodes_path(current_user.id), :action => 'go' do %>
         <div class="card">
                 <%= image_tag("project.svg", :alt => "Total projects created", class: "card-img-top") %>
                 <div class="card-body">
@@ -6,8 +7,10 @@
                         <p class="card-text"><%= @projects.count  %></p>
                 </div>
         </div>
+        <% end %>
 </div>
 <div class="col-md-6">
+                <%= link_to show_specific_bugs_path(current_user.id), :action => 'go' do %>   
         <div class="card">
                 <%= image_tag("bug-solid.svg", :alt => "Total projects created", class: "card-img-top") %>
                 <div class="card-body">
@@ -15,4 +18,5 @@
                         <p class="card-text"><%=  @totalbugs %></p>
                 </div>
         </div>
+        <% end %>
 </div>
