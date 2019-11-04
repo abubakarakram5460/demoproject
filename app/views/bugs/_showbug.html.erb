@@ -15,7 +15,8 @@
           <% elsif(current_user.type=="Developer")%>
               <td class="tabledata">
                 <%= link_to 'Assign Bug', assign_project_developer_bug_path(current_user.id,bug.projectcode_id,bug),method: :post,class:"btn btn-primary" %>
-                <%= link_to 'View', 'javascript:;' , { 'data-toggle' =>  "modal", 'data-target' => '#exampleModalCenter', class: 'btn btn-success btn-lg modal-btn', 'data-img' => bug.screenshot}%>
+                <!-- <%= link_to 'View', 'javascript:;' , { 'data-toggle' =>  "modal", 'data-target' => '#exampleModalCenter', class: 'btn btn-success btn-lg modal-btn', 'data-img' => bug.screenshot}%> -->
+                <%= image_tag(bug.screenshot, :alt => "rss feed", class: "d-inline-block align-top nav-image") %>
                 <%= render 'modal' %>
               </td>
           <% end%>
@@ -37,11 +38,12 @@
                     <% else %>
                           <% if bug.status!="completed" %>
                                 <%= link_to 'Mark as completed', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary ",method: :post %>
+                                
                           <% else %>
                                 <%= link_to 'Mark as completed', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary disabled",method: :post %>
                           <% end %>
                     <% end %>
-                          <%= link_to 'View', 'javascript:;' , { 'data-toggle' =>  "modal", 'data-target' => '#exampleModalCenter', class: 'btn btn-success btn-lg modal-btn', 'data-img' => bug.screenshot}%>
+                    <%= image_tag(bug.screenshot, :alt => "rss feed", class: "d-inline-block align-top nav-image") %>
                 </td>
         <%end%>
   <%end%>
