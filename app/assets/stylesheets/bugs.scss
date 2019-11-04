@@ -8,3 +8,18 @@
     height: 35px;
     font-size: 15px; 
 }
+
+.zoom {
+  padding: 1%;
+  transition: transform .5s;
+  margin: 0 auto;
+}
+.zoom:hover {
+  -ms-transform: scale(13); 
+  -webkit-transform: scale(13);
+  transform: scale(13);
+}
+.showbugimage{
+  width: 80px;
+  height: 40px;
+}

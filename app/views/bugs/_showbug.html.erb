@@ -3,21 +3,20 @@
   <td> <%= bug.bugtype  %> </td>
   <td> <%= bug.status %> </td>
   <td> <%= bug.deadline %> </td>
+  <td>  <%= image_tag(bug.screenshot, :alt => "rss feed", class: "showbugimage zoom") %>  </td>
   <td> <%= bug.projectcode.name %> </td>
   <% if data == "newer" %>
           <% if(current_user.type=="Creator") %>
+              
               <td class="tabledata">
-                <%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %>
-              </td>
-              <td class="tabledata">
+                        <%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %>
                   <%= link_to 'Delete', user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),method: :delete, data: { confirm: 'Are you sure?',remote: true },class:"btn btn-danger delete" %>
-              </td>
+                  
+             </td>
           <% elsif(current_user.type=="Developer")%>
               <td class="tabledata">
                 <%= link_to 'Assign Bug', assign_project_developer_bug_path(current_user.id,bug.projectcode_id,bug),method: :post,class:"btn btn-primary" %>
-                <%= link_to 'View', 'javascript:;' , { 'data-toggle' =>  "modal", 'data-target' => '#exampleModalCenter', class: 'btn btn-success btn-lg modal-btn', 'data-img' => bug.screenshot}%>
-                <!-- <%= image_tag(bug.screenshot, :alt => "rss feed", class: "d-inline-block align-top nav-image") %> -->
-                <%= render 'modal' %>
+               
               </td>
           <% end%>
 
@@ -25,9 +24,10 @@
         <% if(current_user.type=="Creator") %>
               <td class="tabledata">
                 <%= link_to 'Edit', edit_user_projectcode_bug_path(bug.creator_id,bug.projectcode_id,bug),class:"btn btn-primary" %>
-              </td>
+              
+            </td>
         <% elsif(current_user.type=="Developer") %>
-                <%= render 'modal' %>
+                
                 <td class="tabledata" id="change status">
                     <% if bug.bugtype=="bug" %>
                           <% if bug.status!="resolved" %>
@@ -43,9 +43,7 @@
                                 <%= link_to 'Mark as completed', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary disabled",method: :post %>
                           <% end %>
                     <% end %>
-                    <%= link_to 'View', 'javascript:;' , { 'data-toggle' =>  "modal", 'data-target' => '#exampleModalCenter', class: 'btn btn-success btn-lg modal-btn', 'data-img' => bug.screenshot}%>
-                    <!-- <%= image_tag(bug.screenshot, :alt => "rss feed", class: "d-inline-block align-top nav-image") %> -->
-                
-                  </td>
+                        
+                </td>
         <%end%>
   <%end%>

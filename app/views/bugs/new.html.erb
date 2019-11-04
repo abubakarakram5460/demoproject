@@ -6,7 +6,7 @@
     <%= form_for :bug, url: {action: "create"},:html =>{:multipart=>true} do |f| %>
     <%= render "error",resource:@bug %>
   <div class="form-group row">
-        <%= f.label :title ,class:"col-sm-2 col-form-label-special" %> <br>
+        <%= f.label :title ,class:"col-sm-2 col-form-label" %> <br>
       <div class="col-sm-8">
           <%= f.text_field :title ,class:"form-control my-form",required: true %>
       </div>
@@ -47,7 +47,7 @@
     <div class="form-group row">
           <%= f.label :screenshot ,class:"col-sm-2 col-form-label"%> <br>
         <div class="col-sm-8">
-          <%= f.file_field :screenshot ,required: true,class:"form-control my-form file_field"%>
+          <%= f.file_field :screenshot ,required: true,class:"form-control my-form file_field",id:"choose"%>
         </div>
     </div>
       <%= f.submit class: 'btn btn-primary' %>

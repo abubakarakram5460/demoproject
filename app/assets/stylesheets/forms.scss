@@ -25,25 +25,25 @@
 
 .field_with_errors {
   display: inline;
-   
-  
-  }
+
+ }
   .field_with_errors .col-form-label-special{
     margin-left: 45px;
   }
   
-    .field_with_errors input {
+  .field_with_errors input {
       background-color: red;
       position: relative;
-      left: 95px;
-      
-        }
-    
-
-.field_with_errors {
-  background-color: red;
-  
+      left: 168px;
   }
+  .field_with_errors  #choose {
+      background-color: red;
+      position: relative;
+      left: 122px;
+    }
+  .field_with_errors {
+    background-color: red;
+   }
 
 #error_explanation {
   width: 450px;
@@ -68,7 +68,6 @@
   list-style: square;
 }
 
-
 .alert{
   font-weight: bold;
   width:40%;
@@ -77,8 +76,7 @@
   height: 60px;
   margin: auto;
   margin-top: 40px;
-  
-}
+  }
 
 .field{
   text-align: center;
