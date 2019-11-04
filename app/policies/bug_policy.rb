@@ -26,7 +26,7 @@ class BugPolicy < ApplicationPolicy
         @current_user.is_a?(Developer)  
     end 
     def markasreolved?  
-        @current_user.is_a?(Creator)&&record.developer_id==current_user.id
-        true
+        @current_user.is_a?(Developer)&&record.developer_id==current_user.id
+        
     end
 end   

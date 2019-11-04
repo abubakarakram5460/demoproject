@@ -25,7 +25,7 @@
           <td><%= link_to 'Add Resources', get_all_users_path(project.manager_id,project),class:"btn btn-primary" %></td>
           <td><%= link_to 'Edit', edit_user_projectcode_path(project.manager_id,project),class:"btn btn-primary" %></td>
           <td>
-            <%= link_to 'Destroy', user_projectcode_path(project.manager_id,project), method: :delete, data: { confirm: 'Are you sure?', disable_with: "Destroying", remote: true},class:"btn btn-danger delete" %>
+            <%= link_to 'Delete', user_projectcode_path(project.manager_id,project), method: :delete, data: { confirm: 'Are you sure?', disable_with: "Destroying", remote: true},class:"btn btn-danger delete" %>
           <td><%= link_to 'Show', user_projectcode_path(project.manager_id,project),class:"btn btn-success" %></td>
           <% elsif(current_user.type=="Developer") %>
           <td class="tabledata">

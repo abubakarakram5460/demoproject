@@ -23,6 +23,18 @@ class User < ApplicationRecord
         user.projectcodes   
     end
     
+    def self.getallcreators(project)
+        project.users.where(:type => "Creator")    
+    end
+    
+    def self.getalldevelopers(project)
+        project.users.where(:type => "Developer")
+    end
+    
+    def self.getuser(id)
+       @user= User.find(id)
+    end
+    
     def self.get_assigned_creators(projects)
         @creator=[]
         projects.each do |project|

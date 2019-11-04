@@ -32,4 +32,12 @@ class Userproject < ApplicationRecord
           userproject.destroy
           end
     end
+
+    def self.getprojectuser(id)
+        @user=Userproject.find_by(:user_id => id)
+    end 
+    def self.removeprojectuser(id)
+      @userproject=Userproject.find(id)
+      @userproject.destroy
+    end    
 end

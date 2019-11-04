@@ -45,6 +45,7 @@ class ProjectcodePolicy < ApplicationPolicy
     end
     def removeuser?
         @current_user.is_a?(Manager)&&@record.manager_id==@current_user.id  
-    end    
+    end
+   
 
 end   

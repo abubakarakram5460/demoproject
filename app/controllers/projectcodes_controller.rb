@@ -2,29 +2,25 @@ class ProjectcodesController < ApplicationController
   #  after_action :verify_authorized
  
     def index
-        @user= User.find(params[:user_id])
+        @user= User.getuser(params[:user_id])
         authorize @user
         @allprojects = current_user.projectcodes
     end  
 
     def new
-        @user=User.find(params[:user_id])
+        @user=User.getuser(params[:user_id])
         authorize @user
         @project=Projectcode.new
     end
    
     def show
-        @specificproject=Projectcode.find(params[:id])
+        @specificproject=Projectcode.getproject(params[:id])
         authorize @specificproject
-        @creators=@specificproject.users.where(:type => "Creator")
-        @developers=@specificproject.users.where(:type => "Developer")
-        
+        @creators=User.getallcreators(@specificproject)
+        @developers=User.getalldevelopers(@specificproject)
     end   
     
-    def create
-        if(post_params[:name].blank?)
-           post_params[:name]=nil
-        end
+    def create       
            @project=Projectcode.new(name:post_params[:name],manager_id:current_user.id);
            authorize @project
         if @project.save
@@ -35,12 +31,12 @@ class ProjectcodesController < ApplicationController
     end   
     
     def edit
-        @user=User.find(current_user.id)
-        @project=Projectcode.find(params[:id])
+        @user=User.getuser(current_user.id)
+        @project=Projectcode.getproject(params[:id])
     end
 
     def update
-        @project=Projectcode.find(params[:id])
+        @project=Projectcode.getproject(params[:id])
         authorize @project
         if(@project.update(post_params))
            redirect_to user_projectcode_path(params[:user_id],@project)
@@ -50,7 +46,7 @@ class ProjectcodesController < ApplicationController
     end
 
     def destroy 
-        @project=Projectcode.find(params[:id])
+        @project=Projectcode.getproject(params[:id])
         authorize @project
         Bug.deletespecificprojectbugs(@project)
         Userproject.deletespecificprojectassignusers(@project)
@@ -63,10 +59,10 @@ class ProjectcodesController < ApplicationController
     end
 
     def removeuser
-        @user=Userproject.find_by(:user_id => params[:user_id])
-        @project=Projectcode.find(params[:project_id])
+        @userproject=Userproject.getprojectuser(params[:user_id])
+        @project=Projectcode.getproject(params[:project_id])
         authorize @project
-        Userproject.destroy(@user.id)
+        Userproject.removeprojectuser(@userproject.id)
         respond_to do |format|
             format.js
             format.html { redirect_to user_projectcode_path(params[:user_id],@project) , notice: 'Resource was successfully removed.' }
@@ -75,7 +71,7 @@ class ProjectcodesController < ApplicationController
     end
 
     def getallusers
-        @project=Projectcode.find(params[:project_id]);
+        @project=Projectcode.getproject(params[:project_id]);
         authorize @project
         @developers=User.get_all_developers_excluding_specificproject(@project)
         @creators=User.get_all_creators_excluding_specificproject(@project)
@@ -83,8 +79,8 @@ class ProjectcodesController < ApplicationController
     end
     
     def assignresource
-        @project=Projectcode.find(params[:project_id]);
-        @user=User.find(params[:resource_id]);
+        @project=Projectcode.getproject(params[:project_id]);
+        @user=User.getuser(params[:resource_id]);
         @userproject=Userproject.new(user_id:@user.id,projectcode_id:params[:project_id],usertype:@user.type)
         authorize @project
           if @userproject.save
