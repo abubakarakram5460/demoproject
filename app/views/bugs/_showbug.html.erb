@@ -2,8 +2,8 @@
   <td> <%= bug.title  %> </td>
   <td> <%= bug.bugtype  %> </td>
   <td> <%= bug.status %> </td>
-  <td> <%= bug.deadline %> </td>
   <td>  <%= image_tag(bug.screenshot, :alt => "rss feed", class: "showbugimage zoom") %>  </td>
+  <td> <%= bug.deadline %> </td>
   <td> <%= bug.projectcode.name %> </td>
   <% if data == "newer" %>
           <% if(current_user.type=="Creator") %>
@@ -33,14 +33,14 @@
                           <% if bug.status!="resolved" %>
                                 <%= link_to 'Mark as resolved', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary",method: :post %>
                           <% else %>
-                                <%= link_to 'Mark as resolved', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary disabled",method: :post %>
+                                <%= link_to 'Mark as resolved', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary disabled disablebutton",method: :post %>
                           <% end %>
                     <% else %>
                           <% if bug.status!="completed" %>
                                 <%= link_to 'Mark as completed', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary ",method: :post %>
                                 
                           <% else %>
-                                <%= link_to 'Mark as completed', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary disabled",method: :post %>
+                                <%= link_to 'Mark as completed', mark_project_bug_resolved_path(current_user.id,bug.projectcode_id,bug),class:"btn btn-primary disabled disablebutton",method: :post %>
                           <% end %>
                     <% end %>
                         

@@ -12,13 +12,13 @@ class UsersController < ApplicationController
          end   
     end
     def showassignedcreators
-        @user=User.find(params[:user_id])
+        @user=User.getuser(params[:user_id])
         @projects=User.get_manager_projects(@user)
         @creators=User.get_assigned_creators(@projects)
        
     end  
     def showassigneddevelopers
-      @user=User.find(params[:user_id])
+      @user=User.getuser(params[:user_id])
       @projects=User.get_manager_projects(@user)
       @developers=User.get_assigned_developers(@projects)
 

@@ -1,17 +1,17 @@
 class BugsController < ApplicationController
-
+    
 
   def index
-      @user= User.find(params[:user_id])
+      @user= User.getuser(params[:user_id])
       authorize @user
-      @project=Projectcode.find(params[:projectcode_id])
+      @project=Projectcode.getproject(params[:projectcode_id])
       authorize @project
-      @bugs=Bug.where(:projectcode_id => params[:projectcode_id])
+      @bugs=Bug.getspecificprojectbugs(params[:projectcode_id])
   end
 
   def new
        @user = current_user
-       @project=Projectcode.find(params[:projectcode_id])  
+       @project=Projectcode.getproject(params[:projectcode_id])  
        @bug=Bug.new
   end
 
@@ -28,34 +28,35 @@ class BugsController < ApplicationController
   end
 
   def update
-      @bug=Bug.find(params[:id]);
-      authorize @bug
-      if params[:bugstatus]=='resolved'&&@bug.status=='newer'
-         flash[:error] = 'state cannot be change to resolved!!'
-         render 'edit'
-         return
-         elsif params[:bugstatus]=='completed'&&@bug.status=='newer'
-               flash[:error] = 'state cannot be change to completed!!'
-               render 'edit'
-         return 
-         elsif params[:bugstatus]=='started'&&@bug.status=='newer' 
-               @bug.assign
-      end  
-      if(@bug.update(post_params))
-         redirect_to user_projectcode_bugs_path  
-      else 
-         render 'edit'
-         return
-      end
+       @bug=Bug.getbug(params[:id]);
+       authorize @bug
+       nmbr= Bug.setstatus(params[:bugstatus],@bug)
+       if nmbr==2
+          flash[:error] = 'state cannot be change to completed!!'
+          render 'edit'
+          puts "two"
+       elsif nmbr==1 
+             flash[:error] = 'state cannot be change to resolved!!'
+             render 'edit'
+             puts "one"  
+       else    
+            if(@bug.update(post_params))
+                puts "three"
+                redirect_to user_projectcode_bugs_path  
+            else 
+                render 'edit'
+                return
+            end
+        end
   end
   
   def edit
-      @user=User.find(params[:user_id]);
-      @bug=Bug.find(params[:id]);
+      @user=User.getuser(params[:user_id]);
+      @bug=Bug.getbug(params[:id]);
   end
 
   def destroy
-      @bug=Bug.find(params[:id])
+      @bug=Bug.getbug(params[:id])
       authorize @bug
       @bug.destroy 
       respond_to do |format|
@@ -66,25 +67,21 @@ class BugsController < ApplicationController
   end
   
   def markasreolved
-      @bug=Bug.find(params[:id])
+      @bug=Bug.getbug(params[:id])
       authorize @bug
-      if @bug.bugtype=='feature'
-         @bug.complete
-      else
-         @bug.resolve
-      end     
+      Bug.setbugtype(@bug)    
       redirect_to user_projectcode_bugs_path
   end  
   
   def assignbugtodeveloper
-      @bug=Bug.find(params[:id])
+      @bug=Bug.getbug(params[:id])
       authorize @bug
-      @bug.update(developer_id:params[:user_id])
+      Bug.setbug(@bug,params[:user_id])
       @bug.assign
       redirect_to user_projectcode_bugs_path(params[:user_id],@bug.projectcode_id)
   end
   def showspecificbugs
-      @user=User.find(params[:user_id])
+      @user=User.getuser(params[:user_id])
       authorize @user
       @bugs=Bug.getspecificuserbugs(@user)
   end  
