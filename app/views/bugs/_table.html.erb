@@ -15,13 +15,13 @@
         <%if(data=="unassigned")%>
             <%resources.each do |bug| %>
                 <% if bug.status=="newer" %>
-                    <%= render :partial => "showbug",locals: {bug: bug,data:"newer"} %>
+                    <%= render partial: "showbug",locals: {bug: bug,data:"newer"} %>
                 <% end %>
             <%end%>
         <%else%>
             <%resources.each do |bug| %>
                 <%if bug.status=="started" ||bug.status=="completed" ||bug.status=="resolved"%>
-                    <%= render :partial => "showbug",locals: {bug: bug,data:"assigned"} %>
+                    <%= render partial: "showbug",locals: {bug: bug,data:"assigned"} %>
                 <%end%>
             <%end%>
         <%end%>

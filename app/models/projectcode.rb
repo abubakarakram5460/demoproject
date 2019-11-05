@@ -6,14 +6,13 @@ class Projectcode < ApplicationRecord
     belongs_to :manager
     has_many :bugs
 
+    scope :getproject, -> id { find_by(id: id) if id.present? }
+  
   def set_default_value
       if self.name.blank?
          self.name=nil
       end   
   end
-  
-  def self.getproject(id)
-    @project= Projectcode.find(id)
- end
+ 
 
 end

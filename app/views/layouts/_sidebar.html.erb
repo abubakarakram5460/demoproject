@@ -4,28 +4,28 @@
 <div class="usertypename"><%= current_user.type %></div>    
 <div class="sidebar-options">
 <div class="sidebar-link">
-        <%= image_tag("chalkboard-solid.svg", :alt => "rss feed", class: "icon-small") %>
+        <%= image_tag("chalkboard-solid.svg", alt: "rss feed", class: "icon-small") %>
         
     <%= link_to 'Dashboard', dashboard_path ,class:"my-button"%>
 </div>
 <%  if(current_user.type=="Manager")  %> 
 <div class="sidebar-link"> 
-        <%= image_tag("tasks-solid.svg", :alt => "rss feed", class: "icon-small") %>   
+        <%= image_tag("tasks-solid.svg", alt: "rss feed", class: "icon-small") %>   
 <%= link_to 'Showprojects', user_projectcodes_path(current_user.id) ,class:" my-button"%>
 </div>
 <div class="sidebar-link">
-        <%= image_tag("plus-solid.svg", :alt => "rss feed", class: "icon-small") %>
+        <%= image_tag("plus-solid.svg", alt: "rss feed", class: "icon-small") %>
 <%= link_to 'Createproject', new_user_projectcode_path(current_user.id) ,class:"my-button "%>
 </div>
 <% elsif(current_user.type=="Developer")  %>
 <div class="sidebar-link">
-        <%= image_tag("tasks-solid.svg", :alt => "rss feed", class: "icon-small") %>
+        <%= image_tag("tasks-solid.svg", alt: "rss feed", class: "icon-small") %>
 <%= link_to 'Showprojects', user_projectcodes_path(current_user.id) ,class:"my-button"%>
 </div>
 
 <% else %>
 <div class="sidebar-link">
-        <%= image_tag("tasks-solid.svg", :alt => "rss feed", class: "icon-small") %>
+        <%= image_tag("tasks-solid.svg", alt: "rss feed", class: "icon-small") %>
 <%= link_to 'Showprojects', user_projectcodes_path(current_user.id),class:"my-button" %>
 </div>
 <% end %>

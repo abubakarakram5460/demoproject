@@ -1,7 +1,7 @@
 <div class="col-md-4">
-      <%= link_to user_projectcodes_path(current_user.id), :action => 'go' do %>
+      <%= link_to user_projectcodes_path(current_user.id), action: 'go' do %>
            <div class="card">
-                <%= image_tag("project.svg", :alt => "Total projects created", class: "card-img-top") %>
+                <%= image_tag("project.svg", alt: "Total projects created", class: "card-img-top") %>
                     <div class="card-body">
                           <h4 class="card-title">Total projects created</h4>
                               <p class="card-text"><%= @projects.count  %></p>
@@ -12,9 +12,9 @@
 
 
 <div class="col-md-4">
-    <%= link_to  show_specific_creator_path(current_user.id), :action => 'go' do %>
+    <%= link_to  show_specific_creator_path(current_user.id), action: 'go' do %>
       <div class="card">
-            <%= image_tag("user-solid.svg", :alt => "Total projects created", class: "card-img-top") %>
+            <%= image_tag("user-solid.svg", alt: "Total projects created", class: "card-img-top") %>
               <div class="card-body">
                   <h4 class="card-title">Total QA assigned</h4>
                       <p class="card-text"><%=  @totalprojectcreators %></p>
@@ -23,9 +23,9 @@
     <% end %>
 </div>
 <div class="col-md-4">
-    <%= link_to  show_specific_developer_path(current_user.id), :action => 'go' do %>
+    <%= link_to  show_specific_developer_path(current_user.id), action: 'go' do %>
   <div class="card">
-    <%= image_tag("developers.svg", :alt => "Total projects created", class: "card-img-top") %>
+    <%= image_tag("developers.svg", alt: "Total projects created", class: "card-img-top") %>
     <div class="card-body">
       <h4 class="card-title">Total developers assigned</h4>
       <p class="card-text"><%= @totalprojectdevelopers  %></p>

@@ -3,7 +3,7 @@
       <div class="jumbotron">
         <h1>Unassigned bugs</h1>
       </div>
-      <%= render :partial => "table",locals: {resources: @bugs,data:'unassigned'} %>
+      <%= render partial: "table",locals: {resources: @bugs,data:'unassigned'} %>
 
     </div>
 
@@ -12,6 +12,6 @@
       <div class="jumbotron">
         <h1>Assigned bugs</h1>
       </div>
-      <%= render :partial => "table",locals: {resources: @bugs,data:'assigned'} %>
+      <%= render partial: "table",locals: {resources: @bugs,data:'assigned'} %>
     </div>
   </div>

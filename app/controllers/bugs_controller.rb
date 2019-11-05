@@ -16,9 +16,8 @@ class BugsController < ApplicationController
   end
 
   def create
-      @bug=Bug.new(post_params)
-      @bug.status='newer'
-      if(@bug.save)
+      @bug=Bug.create(post_params)
+      if @bug.errors.count==0
          redirect_to user_projectcode_bugs_path
       else
           if(@bug.errors.count>0)
@@ -34,14 +33,14 @@ class BugsController < ApplicationController
        if nmbr==2
           flash[:error] = 'state cannot be change to completed!!'
           render 'edit'
-          puts "two"
        elsif nmbr==1 
              flash[:error] = 'state cannot be change to resolved!!'
              render 'edit'
-             puts "one"  
+       elsif nmbr==3 
+              flash[:error] = 'QA cannot be change to resolved or completed state!!'
+              render 'edit'       
        else    
             if(@bug.update(post_params))
-                puts "three"
                 redirect_to user_projectcode_bugs_path  
             else 
                 render 'edit'

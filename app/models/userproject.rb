@@ -6,7 +6,7 @@ class Userproject < ApplicationRecord
     def self.gettotalcreators(projects)
         @creator=[]
         projects.each do |project|
-        @creators=project.users.where(:type=>"Creator")
+        @creators=project.users.where(type: "Creator")
             @creators.each do |creator|
                 @creator.push(creator)
             end
@@ -17,7 +17,7 @@ class Userproject < ApplicationRecord
     def self.gettotaldevelopers(projects)
         @developer=[]
         projects.each do |project|
-        @developers=project.users.where(:type=>"Creator")
+        @developers=project.users.where(type: "Creator")
             @developers.each do |developer|
                 @developer.push(developer)
             end
@@ -34,7 +34,7 @@ class Userproject < ApplicationRecord
     end
 
     def self.getprojectuser(id)
-        @user=Userproject.find_by(:user_id => id)
+        @user=Userproject.find_by(user_id: id)
     end 
     def self.removeprojectuser(id)
       @userproject=Userproject.find(id)

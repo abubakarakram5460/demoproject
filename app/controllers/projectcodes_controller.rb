@@ -59,15 +59,12 @@ class ProjectcodesController < ApplicationController
     end
 
     def removeuser
+        puts "heheheheehehheheheh"
         @userproject=Userproject.getprojectuser(params[:user_id])
         @project=Projectcode.getproject(params[:project_id])
         authorize @project
-        Userproject.removeprojectuser(@userproject.id)
-        respond_to do |format|
-            format.js
-            format.html { redirect_to user_projectcode_path(params[:user_id],@project) , notice: 'Resource was successfully removed.' }
-            format.json { head :no_content }
-        end
+         @userproject.destroy
+        redirect_to user_projectcode_path(params[:user_id],@project)
     end
 
     def getallusers
