@@ -59,7 +59,6 @@ class ProjectcodesController < ApplicationController
     end
 
     def removeuser
-        puts "heheheheehehheheheh"
         @userproject=Userproject.getprojectuser(params[:user_id])
         @project=Projectcode.getproject(params[:project_id])
         authorize @project
@@ -88,7 +87,7 @@ class ProjectcodesController < ApplicationController
     end  
 
     def post_params
-    params.require(:projectcode).permit(:name)
+        params.require(:projectcode).permit(:name)
     end
  
   end

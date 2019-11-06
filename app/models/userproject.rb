@@ -17,10 +17,10 @@ class Userproject < ApplicationRecord
     def self.gettotaldevelopers(projects)
         @developer=[]
         projects.each do |project|
-        @developers=project.users.where(type: "Creator")
-            @developers.each do |developer|
-                @developer.push(developer)
-            end
+            @developers=project.users.where(type: "Creator")
+                @developers.each do |developer|
+                    @developer.push(developer)
+                end
         end  
         @totaldevelopers=@developer.uniq.count
           
@@ -37,7 +37,7 @@ class Userproject < ApplicationRecord
         @user=Userproject.find_by(user_id: id)
     end 
     def self.removeprojectuser(id)
-      @userproject=Userproject.find(id)
-      @userproject.destroy
+        @userproject=Userproject.find(id)
+        @userproject.destroy
     end    
 end

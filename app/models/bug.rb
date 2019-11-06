@@ -1,9 +1,9 @@
 class Bug < ApplicationRecord
   
-  before_create :set_default_value
+    before_create :set_default_value
 
-  validates :title, presence: true
-  validates :bugtype, presence: true    
+    validates :title, presence: true
+    validates :bugtype, presence: true    
     
     
     attr_accessor :screenshot
@@ -16,12 +16,11 @@ class Bug < ApplicationRecord
     scope :getspecificprojectbugs, -> id { where(projectcode_id: id) if id.present? }
 
     def set_default_value
-      puts "hahahahah"
         self.status="newer"   
     end  
     
     def self.getspecificuserbugs(user)
-      @bugs=user.bugs
+        @bugs=user.bugs
     end  
     
     def self.setstatus(status,bug)
@@ -44,7 +43,7 @@ class Bug < ApplicationRecord
     end
     
     def self.setbug(bug,id)
-     bug.update(developer_id:id)
+        bug.update(developer_id:id)
     end  
     def self.deletespecificprojectbugs(project)
         @specificprojectbugs=Bug.getspecificprojectbugs(project.id)

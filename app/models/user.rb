@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # def set_default_role
   #   self.type ||= :Manager
   # end  
-  scope :getuser, -> id { find_by(id: id) if id.present? }
+  scope :getuser, -> id { find(id) if id.present? }
   scope :getallcreators, -> project { project.users.where(type: "Creator")  }
   scope :getalldevelopers, -> project { project.users.where(type: "Developer")  }
   scope :get_manager_projects, -> user { user.projectcodes  }
