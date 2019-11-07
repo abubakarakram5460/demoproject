@@ -45,12 +45,7 @@ class Bug < ApplicationRecord
     def self.setbug(bug,id)
         bug.update(developer_id:id)
     end  
-    def self.deletespecificprojectbugs(project)
-        @specificprojectbugs=Bug.getspecificprojectbugs(project.id)
-        @specificprojectbugs.each do |bug| 
-        bug.destroy
-        end
-    end
+    
     enum status: [:newer , :started , :resolved , :completed] do
       event :assign do
         transition :newer => :started

@@ -4,40 +4,15 @@ class Userproject < ApplicationRecord
     belongs_to :user
 
     def self.gettotalcreators(projects)
-        @creator=[]
-        projects.each do |project|
-        @creators=project.users.where(type: "Creator")
-            @creators.each do |creator|
-                @creator.push(creator)
-            end
-        end  
-        @totalcreator=@creator.uniq.count
-        
+        User.joins(:projectcodes).where(projectcodes:{id: projects.all.ids }, type: "Creator").uniq.count
     end
     def self.gettotaldevelopers(projects)
-        @developer=[]
-        projects.each do |project|
-            @developers=project.users.where(type: "Creator")
-                @developers.each do |developer|
-                    @developer.push(developer)
-                end
-        end  
-        @totaldevelopers=@developer.uniq.count
-          
+        User.joins(:projectcodes).where(projectcodes:{id: projects.all.ids }, type: "Developer").uniq.count
     end
-       
-    def self.deletespecificprojectassignusers(project)
-          @alluserproject=project.userprojects
-          @alluserproject.each do |userproject| 
-          userproject.destroy
-          end
-    end
-
     def self.getprojectuser(id)
         @user=Userproject.find_by(user_id: id)
     end 
     def self.removeprojectuser(id)
-        @userproject=Userproject.find(id)
-        @userproject.destroy
+        @userproject=Userproject.find(id).destroy
     end    
 end

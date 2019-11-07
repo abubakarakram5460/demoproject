@@ -7,7 +7,7 @@ class BugPolicy < ApplicationPolicy
     end 
     
     def index?
-       
+        true
     end
     def edit?
         @current_user.is_a?(Creator)&&@record.creator_id==current_user.id

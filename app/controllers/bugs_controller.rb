@@ -1,5 +1,6 @@
 class BugsController < ApplicationController
     before_action :setuser, only: [:index,:edit,:new,:showspecificbugs]
+    
     before_action :setbug, only: [:markasreolved,:update,:destroy,:assignbugtodeveloper]
 
   def index

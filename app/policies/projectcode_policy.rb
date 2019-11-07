@@ -7,27 +7,15 @@ class ProjectcodePolicy < ApplicationPolicy
     end 
     
     def index?
-         @project=Userproject.where("projectcode_id=? and user_id=?",@record.id,current_user.id)
-         @project=@project.first
-         if(@project&&@project.user_id==current_user.id)
-             true            
-         end
+        User.joins(:projectcodes).where(projectcodes:{id: record.id }, type: "Creator").ids.include?(current_user.id)
     end
 
     def show?
-         @project=Projectcode.where("manager_id=?",current_user.id)
-         @project=@project.first
-         if(@project&&@project.manager_id==current_user.id)
-             true            
-         end
+        current_user.id==record.manager_id            
     end
     
     def getallusers?
-         @project=Projectcode.where("manager_id=?",current_user.id)
-         @project=@project.first
-           if(@project&&@project.manager_id==current_user.id)
-               true            
-           end
+        current_user.id==record.manager_id 
     end   
     
     def create?
