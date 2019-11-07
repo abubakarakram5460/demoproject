@@ -9,6 +9,9 @@ class BugPolicy < ApplicationPolicy
     def index?
        
     end
+    def edit?
+        @current_user.is_a?(Creator)&&@record.creator_id==current_user.id
+    end   
     
     def create?
         @current_user.is_a?(Creator)

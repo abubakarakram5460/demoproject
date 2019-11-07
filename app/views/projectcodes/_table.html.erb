@@ -17,7 +17,7 @@
             <td><%= resource.name %></td>
            <% if controller.action_name == "show" %>
             <td>
-                <%= link_to 'Delete', deleteuser_project_path(resource.id,@specificproject.id), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger delete" %></td>  
+                <%= link_to 'Delete', deleteuser_project_path(resource.id,@project.id), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger delete" %></td>  
            <% elsif controller.action_name == "getallusers" %>
                 <td><%= link_to 'Add Resource', assign_resource_project_path(@project,resource),method: :post,class:"btn btn-primary" %>
            <% end %>

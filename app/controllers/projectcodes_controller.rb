@@ -1,23 +1,21 @@
 class ProjectcodesController < ApplicationController
-  #  after_action :verify_authorized
- 
+  
+    before_action :setuser, only: [:index,:assignresource,:new]
+    before_action :setproject, only: [:show,:update,:destroy,:removeuser,:getallusers,:assignresource]
+   
     def index
-        @user= User.getuser(params[:user_id])
         authorize @user
         @allprojects = current_user.projectcodes
     end  
 
     def new
-        @user=User.getuser(params[:user_id])
         authorize @user
         @project=Projectcode.new
     end
    
     def show
-        @specificproject=Projectcode.getproject(params[:id])
-        authorize @specificproject
-        @creators=User.getallcreators(@specificproject)
-        @developers=User.getalldevelopers(@specificproject)
+        @creators=User.getallcreators(@project)
+        @developers=User.getalldevelopers(@project)
     end   
     
     def create       
@@ -36,8 +34,6 @@ class ProjectcodesController < ApplicationController
     end
 
     def update
-        @project=Projectcode.getproject(params[:id])
-        authorize @project
         if(@project.update(post_params))
            redirect_to user_projectcode_path(params[:user_id],@project)
         else
@@ -46,8 +42,6 @@ class ProjectcodesController < ApplicationController
     end
 
     def destroy 
-        @project=Projectcode.getproject(params[:id])
-        authorize @project
         Bug.deletespecificprojectbugs(@project)
         Userproject.deletespecificprojectassignusers(@project)
         @project.destroy
@@ -60,27 +54,28 @@ class ProjectcodesController < ApplicationController
 
     def removeuser
         @userproject=Userproject.getprojectuser(params[:user_id])
-        @project=Projectcode.getproject(params[:project_id])
-        authorize @project
-         @userproject.destroy
+        @userproject.destroy
         redirect_to user_projectcode_path(params[:user_id],@project)
     end
 
     def getallusers
-        @project=Projectcode.getproject(params[:project_id]);
-        authorize @project
         @developers=User.get_all_developers_excluding_specificproject(@project)
         @creators=User.get_all_creators_excluding_specificproject(@project)
         @userproject=Userproject.new
     end
+    def setuser
+        @user= User.getuser(params[:user_id])
+    end
+
+    def setproject
+        @project=Projectcode.getproject(params[:id])
+        authorize @project
+    end    
     
     def assignresource
-        @project=Projectcode.getproject(params[:project_id]);
-        @user=User.getuser(params[:resource_id]);
-        @userproject=Userproject.new(user_id:@user.id,projectcode_id:params[:project_id],usertype:@user.type)
-        authorize @project
+        @userproject=Userproject.new(user_id:@user.id,projectcode_id:params[:id],usertype:@user.type)
           if @userproject.save
-              redirect_to user_projectcode_path(@user,params[:project_id])
+              redirect_to user_projectcode_path(@user,params[:id])
           else
               render 'getallusers'
           end

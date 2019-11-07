@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
- 
+  before_action :getdata, only: [:showassignedcreators,:showassigneddevelopers]
+
     def dashboard
          @projects=current_user.projectcodes;
          if(current_user.type=="Manager")
@@ -12,15 +13,14 @@ class UsersController < ApplicationController
          end   
     end
     def showassignedcreators
-        @user=User.getuser(params[:user_id])
-        @projects=User.get_manager_projects(@user)
         @creators=User.get_assigned_creators(@projects)
-       
     end  
     def showassigneddevelopers
+         @developers=User.get_assigned_developers(@projects)
+    end  
+    def getdata
       @user=User.getuser(params[:user_id])
       @projects=User.get_manager_projects(@user)
-      @developers=User.get_assigned_developers(@projects)
+    end
 
-    end  
 end

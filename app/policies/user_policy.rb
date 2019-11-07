@@ -11,7 +11,8 @@ class UserPolicy < ApplicationPolicy
     end
     def showspecificbugs?
         current_user.id==record.id  
-    end      
+    end 
+       
 
     def dashboard?
     #   @current_user.is_a?(Manager)
