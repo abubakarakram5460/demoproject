@@ -1,7 +1,8 @@
 class ProjectcodesController < ApplicationController
   
-    before_action :setuser, only: [:index,:assignresource,:new, :edit]
+    before_action :setuser, only: [:index, :assignresource, :new, :edit]
     before_action :authorizeuser, only: [:index, :new]
+    
     before_action :setproject, only: [:show , :update, :destroy, :removeuser, :getallusers, :assignresource, :edit]
     before_action :authorizeproject, only: [:show, :update, :destroy, :removeuser, :getallusers, :assignresource]
     
@@ -47,7 +48,7 @@ class ProjectcodesController < ApplicationController
     end
 
     def removeuser
-        @userproject = Userproject.getprojectuser(params[:user_id]).destroy
+        Userproject.getprojectuser(params[:user_id]).destroy
         redirect_to user_projectcode_path(params[:user_id] , @project)
     end
 

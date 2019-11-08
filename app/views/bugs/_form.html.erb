@@ -1,0 +1,66 @@
+<div class="middlecontent" >
+    
+    <% if controller.action_name == "new" %>
+          <div class="jumbotron">
+              <h1>New Bug</h1>
+          </div>
+            <% hit_url=user_projectcode_bugs_path %>
+    <% else %>
+              <div class="jumbotron">
+                  <h1>Edit Bug</h1>
+              </div>
+                <% hit_url=user_projectcode_bug_path %>
+    <% end %>
+
+       <%= render "error",resource:@bug %>
+       <%= form_with model: @bug, url:hit_url ,:html =>{:multipart=>true}  do |f| %>
+  
+        <div class="form-group row">
+            <div class="help-block with-errors"></div>
+            <%= f.label :title ,class:"col-sm-2 col-form-label-special" %> <br>
+                <div class="col-sm-8">
+                  <%= f.text_field :title ,class:"form-control my-form",required: true %> 
+                </div>
+        </div>
+      <div class="form-group row">
+          <div class="help-block with-errors"></div>
+            <%= f.label :descryption ,class:"col-sm-2 col-form-label" %> <br>
+                <div class="col-sm-8">
+                  <%= f.text_field :descryption ,class:"form-control my-form",required: true %> 
+                </div>
+      </div>
+  
+      <div class="form-group row">
+        <div class="help-block with-errors"></div>
+            <%= f.label :bugtype ,class:"col-sm-2 col-form-label"%> <br>
+              <div class="col-sm-8">
+                <%= select_tag(:bugtype, options_for_select([['feature','feature'],['Bug','bug']]),class:"form-control my-form") %>
+              </div>
+    </div>
+  
+    <div class="form-group row">
+         <div class="help-block with-errors"></div>
+            <%= f.label :bugstatus ,class:"col-sm-2 col-form-label"%> <br>
+              <div class="col-sm-8">
+                <%= select_tag(:bugstatus, options_for_select([['new','new'],['started','started'],['completed','completed']]),class: "form-control my-form")%>
+              </div>
+    </div>  
+  
+          <div class="form-group row">
+              <div class="help-block with-errors"></div>
+                  <%= f.label :deadline ,class:"col-sm-2 col-form-label"%> <br>
+                  <div class="col-sm-8">
+                      <%= f.date_field :deadline, :class => "form-control my-form",required:true ,min: Date.today%>
+                  </div>
+          </div> 
+  
+            <div class="form-group row">
+                <div class="help-block with-errors"></div>
+                    <%= f.label :screenshot ,class:"col-sm-2 col-form-label"%> <br>
+                    <div class="col-sm-8">
+                        <%= f.file_field :screenshot ,required: true,class:"form-control my-form file_field"%>
+                    </div>
+            </div> 
+        <%= f.submit class: 'btn btn-primary' %>
+        <% end  %>
+</div>

@@ -1,27 +1,27 @@
 <div class="middlecontent">
-     <% if controller.action_name == "new" %>
-    <div class="jumbotron">
-        <h1> Create Project</h1>
-    </div>
-    <% else %>
-    <div class="jumbotron">
-        <h1> Edit Project</h1>
-    </div>
-    <% end %>
-    <%= form_for  [User, @project] do |f| %>
-    <%= render "bugs/error",resource:@project %>
-          <div class="form-group row">
-              <div class="help-block with-errors"></div>
-              <%= f.label :name ,class:"col-sm-2 col-form-label" %> <br>
-                <div class="col-sm-8">
-                  <%= f.text_field :name ,class:"form-control my-form",required: true %>
-                </div>
-             </div>
     <% if controller.action_name == "new" %>
+        <div class="jumbotron">
+            <h1> Create Project</h1>
+        </div>
+  <% else %>
+          <div class="jumbotron">
+            <h1> Edit Project</h1>
+          </div>
+  <% end %>
+  <%= form_for  [User, @project] do |f| %>
+  <%= render "bugs/error",resource:@project %>
+  <div class="form-group row">
+      <div class="help-block with-errors"></div>
+        <%= f.label :name ,class:"col-sm-2 col-form-label" %> <br>
+          <div class="col-sm-8">
+              <%= f.text_field :name ,class:"form-control my-form",required: true %>
+          </div>
+  </div>
+  <% if controller.action_name == "new" %>
         <%= f.button 'Create Project', type: 'submit',class:"btb btn-primary" %>
-    <% else %>
-        <%= f.button 'Edit Project', type: 'submit',class:"btb btn-primary" %>
-    <% end %>
+  <% else %>
+          <%= f.button 'Edit Project', type: 'submit',class:"btb btn-primary" %>
+  <% end %>
 
-   <% end %>
+  <% end %>
 </div>

@@ -47,3 +47,17 @@ $(document).on('click',".open-AddImgDialog", function() {
 $(document).on('click',"#open-AddImgDialog", function() {  
     $('#imagemodal').modal('show');   
 });
+
+
+$(function() {
+    $('.alert-alert').delay(500).fadeIn('normal', function() {
+        $(this).delay(4500).fadeOut();
+        });
+    });
+
+    $(function() {
+        $('.alert-notice').delay(500).fadeIn('normal', function() {
+            $(this).delay(2500).fadeOut();
+            });
+        });
+

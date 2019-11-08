@@ -7,7 +7,7 @@ class ProjectcodePolicy < ApplicationPolicy
     end 
     
     def index?
-        User.joins(:projectcodes).where(projectcodes:{id: record.id }, type: "Creator").ids.include?(current_user.id)
+        User.joins(:projectcodes).where(projectcodes:{id: record.id }, type: ["Creator","Developer"]).ids.include?(current_user.id)
     end
 
     def show?

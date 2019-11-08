@@ -1,18 +1,18 @@
 <div class="middlecontent">
   <div class="jumbotron">
-    <h1>Add Resorces for <%=@project.name %>'s </h1>
+      <h1>Add Resorces for <%=@project.name %>'s </h1>
   </div>
   <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-          <h3 class="tableheading">QA</h3>
-        <%= render partial: "table",locals: {resource: @creators} %>
-      </div>
-      <div class="col-md-6">
-          <h3 class="tableheading">Developer</h3>
-        <%= render partial: "table",locals: {resource: @developers} %>
-      </div>
-    </div>
+      <div class="row">
+          <div class="col-md-6">
+              <h3 class="tableheading">QA</h3>
+                  <%= render partial: "table",locals: {resource: @creators} %>
+          </div>
+              <div class="col-md-6">
+                  <h3 class="tableheading">Developer</h3>
+                     <%= render partial: "table",locals: {resource: @developers} %>
+              </div>
+        </div>
   </div>
   <div>
   </div>

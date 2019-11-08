@@ -24,21 +24,20 @@ class Bug < ApplicationRecord
     end  
     
     def self.setstatus(status,bug)
-        if status=='resolved'&&bug.status=='newer'
+        if status=='resolved' && bug.status=='newer'
               return 1
-        elsif status=='completed'&&bug.status=='newer'
+        elsif status=='completed' && bug.status=='newer'
               return 2
-        elsif status=='completed'||'resolved'&&bug.status=='started'
-              return 3
         else  
-            bug.assign 
+              bug.assign 
         end 
     end 
+    
     def self.setbugtype(bug)
         if bug.bugtype=='feature'
             bug.complete
         else
-            bug.resolve
+            	bug.resolve
         end 
     end
     
