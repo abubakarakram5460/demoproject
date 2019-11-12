@@ -32,12 +32,7 @@
             render 'edit'
       end
     end
-    
-    def showmessage(message)
-      flash[:error] = message
-      render 'edit'
-    end  
-
+     
     def edit
       
     end
